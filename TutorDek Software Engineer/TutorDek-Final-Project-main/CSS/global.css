@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+
+:root {
+  /* fonts */
+  --font-inter: Inter;
+  --font-poppins: Poppins;
+  --font-DM-Sans: "DM Sans";
+  --font-satoshi: Satoshi;
+  --font-raleway: Raleway;
+
+  /* font sizes */
+  --body-font-size-small: 12px;
+  --body-font-size-medium: 18px;
+  --body-font-size-large: 20px;
+  --heading-font-size-small: 30px;
+  --heading-font-size-medium: 34px;
+  --heading-font-size-large: 48px;
+  --button-font: 14px;
+  --font-size-32px: 32px;
+  --title-font: 16px;
+
+
+  /* Colors */
+  --secondary-main: #f17300;
+  --primary-main1: #0e5399;
+  --primary-main: #054a91;
+  --primary-pressed: #033263;
+  --color-darkslateblue-100: rgba(3, 50, 99, 0.4);
+  --color-darkslateblue-200: rgba(5, 74, 145, 0.1);
+  --color-darkslateblue-300: rgba(3, 50, 99, 0.6);
+  --neutral-white: #fff;
+  --gray-600: #475467;
+  --neutral-800: #424242;
+  --secondary-500: #e0ff00;
+  --primary-surface-level-1: #cddbe9;
+  --neutral-700: #616161;
+  --color-dodgerblue-100: #2697ff;
+  --primary-hover: #126cc9;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #eee;
+  --neutral-50: #fafafa;
+  --color1: #1a202c;
+  --color-gray-100: rgba(0, 0, 0, 0.6);
+  --color-gray-200: rgba(0, 0, 0, 0.5);
+  --color-gray-300: rgba(0, 0, 0, 0.8);
+  --primary-border: #b0d5fc;
+  --primary-600: #7f56d9;
+  --secondary-border: #fcdec2;
+  --color-chocolate: rgba(194, 92, 0, 0.4);
+  --secondary-focus: #ffa757;
+  --primary-hover1: #0763c0;
+  --color: #2c5282;
+  --color-midnightblue: #01257d;
+  --color-black: #000;
+
+}

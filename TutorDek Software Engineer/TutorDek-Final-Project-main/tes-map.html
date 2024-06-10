@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutorDek</title>
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h2>TutorDek</h2>
+    <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    <div id="map"></div>
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDxhhn5N4cLnEzpfxTKIG9ewIVBP6sgdA4&callback=initMap&libraries=geometry">
+    </script>
+    <script>
+    // Initialize and add the map
+    function initMap() {
+        // The location of center
+        const center = {lat: -6.200000, lng: 106.816666};
+        // The map, centered at center
+        const map = new google.maps.Map(
+            document.getElementById('map'), {zoom: 12, center: center});
+
+        // The locations of the markers
+        const markerLocations = Array.from({length: 12}, () => ({
+            lat: center.lat + (Math.random() - 0.5) * 0.1,
+            lng: center.lng + (Math.random() - 0.5) * 0.1
+        }));
+
+        // Array to hold all the markers
+        const markers = [];
+
+        // The markers, positioned at markerLocations
+        markerLocations.forEach(location => {
+            const marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                icon: {
+                    url: "./public/teacherMale.png", // URL of the image
+                    scaledSize: new google.maps.Size(30, 30) // sets the size of the icon
+                }
+                //label: "Teacher" + (index + 1)
+            });
+            markers.push(marker);
+        });
+
+        // Your location
+        const yourLocation = new google.maps.LatLng(-6.201935, 106.781525);
+        const marker = new google.maps.Marker({
+            position: yourLocation,
+            map: map
+        });
+
+        const infowindow = new google.maps.InfoWindow({
+            content: "Your location:"
+        });
+
+        marker.addListener("click", () => {
+            infowindow.open(map, marker);
+        });
+
+        // Calculate the shortest distance
+        let shortestDistance = Infinity;
+        let closestLocation;
+        let closestMarker;
+        markerLocations.forEach((location, index) => {
+            const distance = google.maps.geometry.spherical.computeDistanceBetween(yourLocation, new google.maps.LatLng(location.lat, location.lng));
+            if (distance < shortestDistance) {
+                shortestDistance = distance;
+                closestLocation = location;
+                closestMarker = markers[index];
+            }
+        });
+
+        console.log(`The shortest distance is ${shortestDistance} meters.`);
+        console.log(`The closest location is at latitude ${closestLocation.lat} and longitude ${closestLocation.lng}.`);
+
+        // Wait for 5 seconds, then zoom in and remove other markers
+        map.addListener('click', function() {
+            setTimeout(() => {
+                // Zoom in
+                map.setZoom(15);
+                map.setCenter(closestLocation);
+    
+                // Remove other markers
+                markers.forEach(marker => {
+                    if (marker !== closestMarker) {
+                        marker.setMap(null);
+                    }
+                });
+            }, 5000);
+        });
+    }
+    </script>
+</body>
+</html>
+

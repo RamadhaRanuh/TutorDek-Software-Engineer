@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Sign in</title>
+    <link rel="stylesheet" href="Sign-in fiture/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap">
+  </head>
+  <body>
+    <form action="landing-page.html" >
+      <img class="img1" src="public/school.svg">
+      <div style="display: flex; flex-direction: row; justify-content: center; gap: 10px; align-items: center;">
+        <h2 style="color: #0E5399; font-size: 40px;">TutorDek:</h2> <h2 style="color: white; font-size: 40px;"> Sign In</h2>
+      </div>
+      <div class="form-group email">
+        <label for="email"></label>
+        <input type="text" id="email" placeholder="Email Address" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)">
+      </div>
+      <div class="form-group password">
+        <label for="password"></label>
+        <input type="password" id="password" placeholder="Password" onfocus="clearPlaceholder(this)" onblur="restorePlaceholder(this)">
+      </div>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div class="remember-me">
+          <input type="checkbox" id="rememberMe" />
+          <label for="rememberMe" class="remember-me-text" style="color: white; width: 120px;">Remember Me</label>
+        </div>
+        <div class="forgor">
+          Forgot Password?
+        </div>
+      </div>
+      
+      <div class="form-group submit-btn">
+        <input type="submit" value="Sign In to TutorDek">
+      </div>
+      <div class="google">
+        <img src="Sign-in fiture/public/search 1.svg" style="height: 30px; width: 30px;"><p>Sign In with Google</p>
+      </div>
+    </form>
+
+    <script src="Sign-in fiture/script.js"></script>
+    <script>
+      function clearPlaceholder(input) {
+        input.setAttribute('data-placeholder', input.placeholder);
+        input.placeholder = '';
+      }
+
+      function restorePlaceholder(input) {
+        input.placeholder = input.getAttribute('data-placeholder');
+      }
+    </script>
+  </body>
+</html>
