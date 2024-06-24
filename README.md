@@ -1,7 +1,5 @@
 <h1>TutorDek-Software-Engineer</h1>
 
----
-
 # Description
 
 TutorDek is a web application designed to streamline the process of finding and hiring tutors for both students and educators. Our platform connects learners with qualified tutors in a wide range of subjects, providing a seamless experience for booking, scheduling, and managing tutoring sessions.
