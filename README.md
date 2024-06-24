@@ -18,8 +18,6 @@ TutorDek boasts an intuitive user interface that is easy to navigate for both st
 
 # Features
 
-Features
-
 TutorDek comes packed with features designed to enhance the tutoring experience:
 
 1. Tutor Matching: Intelligent algorithms that match students with the best-suited tutors based on their specific needs and preferences.
