@@ -1,6 +1,5 @@
 ## TutorDek-Software-Engineer
 
----
 
 # Description
 
