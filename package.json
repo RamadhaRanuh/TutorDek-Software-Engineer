@@ -1,0 +1,20 @@
+{
+  "name": "tutordek",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "TutorDek local learner application and browser regression suite",
+  "scripts": {
+    "start": "python server.py",
+    "test:api": "python -m unittest discover -s tests -p \"test_*.py\" -v",
+    "test:ui": "playwright test",
+    "test": "npm run test:api && npm run test:ui",
+    "format": "prettier --write web tests/browser playwright.config.js package.json .prettierrc.json",
+    "format:check": "prettier --check web tests/browser playwright.config.js package.json .prettierrc.json"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "prettier": "3.9.9"
+  }
+}
