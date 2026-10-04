@@ -36,7 +36,7 @@ class HTTPTests(unittest.TestCase):
         return result
 
     def test_api_and_allowlisted_static_files(self):
-        for path in ("/", "/web/app.js", "/web/styles.css", "/assets/content@2x.png", "/api/health", "/api/catalogue"):
+        for path in ("/", "/Javascript/popup.js", "/CSS/global.css", "/public/content@2x.png", "/api/health", "/api/catalogue"):
             status, headers, body = self.request("GET", path)
             self.assertEqual(status, 200, path)
             self.assertIn("Content-Security-Policy", headers)
@@ -45,11 +45,17 @@ class HTTPTests(unittest.TestCase):
             self.assertEqual(self.request("GET", path)[0], 404, path)
         self.assertEqual(self.request("GET", "/api/health", headers={"Host": "hostile.example"})[0], 403)
 
-    def test_legacy_routes_redirect_to_current_screens(self):
-        for path, route in (("landing-page.html", "/"), ("signup.html", "/signup"), ("pesan-kelas-random.html", "/book/auto"), ("e-book.html", "/library")):
-            status, headers, _ = self.request("GET", "/TutorDek%20Software%20Engineer/TutorDek-Final-Project-main/" + path)
-            self.assertEqual(status, 302)
-            self.assertEqual(headers["Location"], "/#" + route)
+    def test_original_pages_are_served_without_replacing_their_interface(self):
+        from tutordek.http import PAGES
+        for page in PAGES:
+            for prefix in ("/", "/TutorDek%20Software%20Engineer/TutorDek-Final-Project-main/"):
+                status, headers, body = self.request("GET", prefix + page)
+                self.assertEqual(status, 200)
+                self.assertNotIn("Location", headers)
+                self.assertNotIn(b'http-equiv="refresh"', body)
+        body = self.request("GET", "/")[2]
+        self.assertIn(b'class="hero-section"', body)
+        self.assertIn(b'class="desktop-default"', body)
 
     def test_csrf_body_bounds_types_and_unknown_routes(self):
         self.assertEqual(self.request("POST", "/api/login", {}, {"X-TutorDek": ""})[0], 403)
@@ -88,6 +94,16 @@ class HTTPTests(unittest.TestCase):
         with self.assertRaises(Problem) as caught:
             self.server.rate_limit("test-address")
         self.assertEqual(caught.exception.status, 429)
+
+    def test_remember_me_controls_browser_cookie_persistence(self):
+        data = {"name": "Cookie Learner", "email": "cookie@example.com", "password": "a real password 456"}
+        self.assertEqual(self.request("POST", "/api/signup", data)[0], 201)
+        status, headers, _ = self.request("POST", "/api/login", {**data, "remember": False})
+        self.assertEqual(status, 200)
+        self.assertNotIn("Max-Age", headers["Set-Cookie"])
+        status, headers, _ = self.request("POST", "/api/login", {**data, "remember": True})
+        self.assertEqual(status, 200)
+        self.assertIn("Max-Age=604800", headers["Set-Cookie"])
 
     def test_navigation_disconnect_does_not_send_a_second_response(self):
         from tutordek.http import Handler

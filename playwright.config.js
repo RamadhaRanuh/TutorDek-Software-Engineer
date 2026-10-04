@@ -18,12 +18,19 @@ export default defineConfig({
       name: 'desktop',
       use: { ...devices['Desktop Chrome'], viewport: { width: 1440, height: 1000 } },
     },
-    { name: 'mobile', use: { ...devices['Pixel 7'], viewport: { width: 390, height: 844 } } },
+    {
+      name: 'mobile',
+      use: {
+        ...devices['Pixel 7'],
+        viewport: { width: 390, height: 844 },
+        baseURL: 'http://127.0.0.1:8769',
+      },
+    },
   ],
-  webServer: {
-    command: 'python server.py --temporary --port 8765',
-    url: 'http://127.0.0.1:8765/api/health',
+  webServer: [8765, 8769].map((port) => ({
+    command: `python server.py --temporary --port ${port}`,
+    url: `http://127.0.0.1:${port}/api/health`,
     reuseExistingServer: false,
     timeout: 30000,
-  },
+  })),
 });

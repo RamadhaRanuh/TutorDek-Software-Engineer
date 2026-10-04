@@ -9,8 +9,8 @@
     "test:api": "python -m unittest discover -s tests -p \"test_*.py\" -v",
     "test:ui": "playwright test",
     "test": "npm run test:api && npm run test:ui",
-    "format": "prettier --write web tests/browser playwright.config.js package.json .prettierrc.json",
-    "format:check": "prettier --check web tests/browser playwright.config.js package.json .prettierrc.json"
+    "format": "prettier --write tests/browser playwright.config.js package.json .prettierrc.json \"TutorDek Software Engineer/TutorDek-Final-Project-main/Javascript/{client,repairs,class-milih,class-random,faq,list-guru,promo,testimoni}.js\" \"TutorDek Software Engineer/TutorDek-Final-Project-main/CSS/repairs.css\" \"TutorDek Software Engineer/TutorDek-Final-Project-main/Sign-{in,up} fiture/script.js\"",
+    "format:check": "prettier --check tests/browser playwright.config.js package.json .prettierrc.json \"TutorDek Software Engineer/TutorDek-Final-Project-main/Javascript/{client,repairs,class-milih,class-random,faq,list-guru,promo,testimoni}.js\" \"TutorDek Software Engineer/TutorDek-Final-Project-main/CSS/repairs.css\" \"TutorDek Software Engineer/TutorDek-Final-Project-main/Sign-{in,up} fiture/script.js\""
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
