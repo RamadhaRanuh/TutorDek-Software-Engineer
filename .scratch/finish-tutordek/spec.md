@@ -1,6 +1,6 @@
 # TutorDek completion specification
 
-Status: ready-for-agent
+Status: implemented
 Source: [Finish TutorDek: a working learning journey](map.md)
 
 ## Problem and outcome
@@ -23,6 +23,10 @@ The original pages describe a tutoring product but do not maintain accounts, res
 ## Self-assessment
 
 The recommendation covers all learner-facing areas named by the README while separating infrastructure-dependent capabilities. Scope is complete for a local demonstration application, not a production tutoring business: tutor data and checkout are demonstrations; the assistant is grounded retrieval; the study room provides notes/drawing rather than video transport. Account recovery, tutor/admin portals, actual payments, live video and model-backed RAG require separate infrastructure-backed work. Avoid nonfunctional CTAs for those capabilities. Atomic booking allocation, private-data isolation, malformed input, real-time boundaries, truthful UI, and persistence receive explicit tests.
+
+## Implementation evidence
+
+The acceptance gate passed: 26 Python domain/HTTP tests, 14 desktop/mobile browser tests, layout checks down to 320px, all-screen axe checks, keyboard dialogs, reduced motion, downloads, persistence, formatting and whitespace checks. Screenshots were inspected. See [the verification record](../../docs/verification.md) and [startup instructions](../../README.md). The commit chain separates planning, domain services, the connected interface, legacy migration, automated verification and final documentation.
 
 ## Technical references
 

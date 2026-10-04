@@ -1,7 +1,7 @@
 # Finish TutorDek: a working learning journey
 
 Label: wayfinder:map
-Status: specified
+Status: resolved
 
 ## Destination
 
@@ -14,6 +14,7 @@ A locally runnable TutorDek application: learners can create an account, find a 
 - Claim each ticket before resolving it; record dependencies, answers, and evidence in its file. Link resolutions here by title.
 - Preserve the project's Indonesian language, blue/orange identity, original assets, legacy URLs, SQL reference, and separate RAG notebook. No external service credentials are present.
 - Git author and committer use the existing user identity: Rama Ranuh <ramadha.ranuh@gmail.com>. No assistant co-author trailer.
+- Implementation and acceptance checks are complete; see [verification evidence](../../docs/verification.md). The resulting app and its service boundaries are described in [the README](../../README.md).
 
 ## Decisions so far
 

@@ -1,33 +1,81 @@
-<h1>TutorDek-Software-Engineer</h1>
+# TutorDek
 
-# Description
+TutorDek is a runnable Indonesian tutoring and learning application. Create a learner account, find a tutor, book a one-hour session, and keep your learning activity in one place.
 
-TutorDek is a web application designed to streamline the process of finding and hiring tutors for both students and educators. Our platform connects learners with qualified tutors in a wide range of subjects, providing a seamless experience for booking, scheduling, and managing tutoring sessions.
+## Run locally
 
-# User Interface
+Requires **Python 3.10 or newer**. No Python packages, MySQL, API keys, or frontend build are needed.
 
-TutorDek boasts an intuitive user interface that is easy to navigate for both students and tutors. Key components of the UI include:
+```sh
+python server.py
+```
 
-1. Dashboard: A central hub where users can view their upcoming sessions, recent activity, and notifications.
-2. Search Functionality: Advanced search filters to find the perfect tutor based on subject expertise, availability, and user ratings.
-3. Profile Pages: Detailed profiles for tutors, showcasing their qualifications, experience, reviews, and hourly rates.
-4. Booking System: A straightforward booking process that allows students to schedule sessions with just a few clicks.
-5. Messaging: An integrated messaging system enabling direct communication between students and tutors for session planning and queries.
-6. Payment Gateway: Secure and convenient payment options for booking and paying for tutoring sessions.
+Open **http://127.0.0.1:8000**. Create an account through **Daftar**; there are no shared default passwords. Your account, sessions, bookings, messages, notes, and progress persist in `data/tutordek.sqlite3`. This directory is ignored by Git. Back up the database with the server stopped.
 
-# Features
+```sh
+python server.py --port 8080
+python server.py --temporary --port 8001
+```
 
-TutorDek comes packed with features designed to enhance the tutoring experience:
+`--temporary` runs an isolated demonstration without modifying saved data. `TUTORDEK_DB` selects a different database file. Opening HTML files directly or using a static-only server does not provide the app's API.
 
-1. Tutor Matching: Intelligent algorithms that match students with the best-suited tutors based on their specific needs and preferences.
-2. Robo-Tutor: An AI-powered tutor that provides instant answers and assistance with homework and study questions.
-3. Live Tutoring: Real-time tutoring sessions with live video, audio, and interactive whiteboards for an engaging learning experience.
-4. Progress Tracking: Tools that allow tutors to track student progress, set goals, and provide detailed feedback.
-5. BrainBoost: Personalized study plans and exercises designed to boost memory and enhance learning efficiency.
-6. Forum Discussions: A community forum where students and tutors can discuss topics, ask questions, and share knowledge.
-7. Study Packages: Curated sets of study materials, practice questions, and other resources tailored to specific subjects and exams.
-8. E-Books: Access to a wide range of educational e-books and reference materials.
-9. Promos & Discounts: Special offers and discount codes for tutoring sessions and study packages.
-10. Testimonials: A platform for students to share their success stories and feedback about their tutoring experiences.
+## Working features
 
+- Accounts: registration, login, logout, expiring protected sessions, server validation and hashed passwords.
+- Tutor discovery: name, subject, school level, mode, price, rating and date/slot filtering; tutor profiles; manual or automatic matching.
+- Booking: dependent grade/topic choices, online/offline sessions, WIB scheduling, address validation, atomic conflict prevention, server pricing, promos, simulated checkout, cancellation and completion.
+- Dashboard and study room: saved sessions, statuses, notes, local whiteboard with PNG export, and persistent outgoing messages.
+- Learning: nine original text lessons, printable/downloadable HTML ebooks, three free study packages, BrainBoost and an 18-question tryout with server scoring, saved results, completions and goals.
+- Community: forum questions, replies and reviews linked to completed bookings.
+- Learning assistant: retrieves explanations from bundled lessons, links sources, and saves history.
+- Interface: Indonesian copy, desktop/mobile layouts, keyboard navigation, native dialogs and FAQ, loading/error/empty states, visible focus and reduced motion.
 
+## Demonstration boundaries
+
+Tutor profiles, qualifications, ratings, rates and hourly availability are **demo data**, based on the original catalogue. A booking reserves a slot inside this application, not a real tutor. Automatic matching selects a compatible available tutor by demo rating, then price.
+
+Checkout is a **simulation**: no real money, card numbers, bank credentials or refunds are processed. `BELAJAR20` applies a server-calculated 20% discount, capped at Rp25,000. All dates and times use **Asia/Jakarta (WIB, UTC+7)**. Reservations must be in the future and within 90 days. A confirmed session can be completed only after its scheduled end; then its owner can leave one review.
+
+The study room supplies notes and a drawing board; it does **not** provide video/audio conferencing or multiplayer drawing. Outgoing messages persist, but no tutor account or synthetic reply is provided. Whiteboard drawings stay in the browser until downloaded. The assistant is **material retrieval, not an LLM**. Content is original sample text, not licensed publisher ebooks or a video library. The old paid subscription mockups are replaced with free self-study collections; tutoring is booked separately.
+
+Production payments, email/password recovery, verified tutor onboarding, tutor/admin portals, live video, production deployment, and model-backed RAG require additional infrastructure and are outside this local completion effort. No nonworking controls promise those services.
+
+## Tests
+
+Backend tests need only Python:
+
+```sh
+python -m unittest discover -s tests -p "test_*.py" -v
+```
+
+Browser tests require **Node.js 20+**:
+
+```sh
+npm ci
+npx playwright install chromium
+npm test
+```
+
+Playwright starts a temporary database/server on port 8765, runs desktop Chromium and mobile Chromium emulation, and stops the server when finished. Tests cover user journeys, escaped content, downloads, persistence, layout overflow, reduced motion and axe accessibility rules. Python checks also exercise simultaneous reservations, account isolation, malformed requests, pricing, state transitions, expiry and server-scored exercises.
+
+Reports and screenshots in `playwright-report/`, `test-results/`, and `artifacts/` are ignored. [Verification notes](docs/verification.md) record the evidence. GitHub Actions runs the same tests on Linux. Mobile emulation does not substitute for physical-device or Safari/Firefox testing.
+
+## Project structure
+
+| Path | Purpose |
+| --- | --- |
+| `server.py` | App entrypoint |
+| `tutordek/service.py` | Validated domain operations and persistence |
+| `tutordek/http.py` | Same-origin JSON API and allowlisted static serving |
+| `tutordek/schema.sql` | Active SQLite schema |
+| `tutordek/content.py` | Original lessons and demo catalogue |
+| `web/` | App shell, route modules and responsive styles |
+| `tests/` | Isolated backend and browser tests |
+| `.scratch/finish-tutordek/` | Wayfinder map, resolutions and reviewed spec |
+| `GLOSSARY.md` | Domain vocabulary |
+| `TutorDek Software Engineer/TutorDek-Final-Project-main/` | Original assets, historical CSS/JS, MySQL references and legacy URLs |
+| `Personal-Chatbot_LLM_RAG/` | Separate exploratory RAG notebook; not an app dependency |
+
+Original HTML URLs redirect to current screens, including both booking flows. Old generated CSS/JS and MySQL dumps are historical references and are not loaded by the application. Their schema shortcomings and migration boundaries are documented in the [wayfinder audit](.scratch/finish-tutordek/issues/01-completion-boundary.md).
+
+The Python HTTP server is intended for local development and demonstration. For external hosting, use an appropriate production server/reverse proxy with HTTPS, set `TUTORDEK_PUBLIC_HOST` to the public host (including a nondefault port if applicable) and `TUTORDEK_SECURE_COOKIE=1`, and perform a deployment review. Avoid exposing the repository or database through another static server.
