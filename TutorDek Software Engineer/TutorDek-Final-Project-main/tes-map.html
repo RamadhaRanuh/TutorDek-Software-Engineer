@@ -1,14 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=../../#/tutors">
-  <title>TutorDek ? Halaman telah diperbarui</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutorDek</title>
+    <style>
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
+<link rel="stylesheet" href="vendor/fonts.css">
+<link rel="stylesheet" href="CSS/repairs.css">
 </head>
 <body>
-  <h1>TutorDek telah diperbarui.</h1>
-  <p><a href="../../#/tutors">Buka halaman TutorDek</a>.</p>
-  <p>Jalankan <code>python server.py</code> dari direktori utama untuk menggunakan aplikasi dan menyimpan aktivitas belajarmu.</p>
+    <h2>TutorDek</h2>
+    <p>Pratinjau pencocokan tutor. Peta dan pencarian lokasi terdekat belum dikonfigurasi.</p>
+    <div id="map" style="background:#e7edf9;border-radius:24px;display:grid;place-items:center"><a class="service-button" href="pesan-kelas-random.html">Pilih tutor otomatis</a></div>
+
+
+
+<script src="Javascript/client.js"></script>
+<script src="Javascript/repairs.js"></script>
 </body>
 </html>

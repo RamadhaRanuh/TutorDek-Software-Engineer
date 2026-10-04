@@ -16,8 +16,9 @@ from urllib.parse import unquote, urlsplit
 from .service import Problem
 
 ROOT = Path(__file__).resolve().parent.parent
-ASSETS = ROOT / "TutorDek Software Engineer" / "TutorDek-Final-Project-main" / "public"
-LEGACY = {"landing-page.html": "/", "signup.html": "/signup", "sign-in.html": "/login", "paket-belajar.html": "/packages", "e-book.html": "/library", "promo.html": "/promos", "testimoni.html": "/reviews", "pesan-kelas-milih.html": "/book", "pesan-kelas-random.html": "/book/auto", "tes-map.html": "/tutors"}
+FRONTEND = ROOT / "TutorDek Software Engineer" / "TutorDek-Final-Project-main"
+PAGES = {"landing-page.html", "signup.html", "sign-in.html", "paket-belajar.html", "e-book.html", "promo.html", "testimoni.html", "pesan-kelas-milih.html", "pesan-kelas-random.html", "tes-map.html"}
+STATIC_DIRECTORIES = {"CSS", "Javascript", "public", "fitur", "Sign-in fiture", "Sign-up fiture", "vendor"}
 
 
 class AppServer(ThreadingHTTPServer):
@@ -56,7 +57,7 @@ class Handler(BaseHTTPRequestHandler):
         # Avoid logging query strings, cookies, or submitted content.
         pass
 
-    def respond(self, status, content, content_type="application/json; charset=utf-8", cookie=None, location=None):
+    def respond(self, status, content, content_type="application/json; charset=utf-8", cookie=None, location=None, remember=True):
         if isinstance(content, (dict, list)):
             content = json.dumps(content, ensure_ascii=False).encode("utf-8")
         elif isinstance(content, str):
@@ -68,10 +69,12 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("X-Content-Type-Options", "nosniff")
         self.send_header("Referrer-Policy", "same-origin")
         self.send_header("X-Frame-Options", "DENY")
-        self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'")
+        # The original pages use inline event handlers. Assets and API calls stay local.
+        self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'")
         if cookie is not None:
             suffix = "; Secure" if self.server.secure_cookie else ""
-            self.send_header("Set-Cookie", f"tutordek_session={cookie}; HttpOnly; SameSite=Lax; Path=/; Max-Age={604800 if cookie else 0}{suffix}")
+            age = f"; Max-Age={604800 if cookie else 0}" if remember or not cookie else ""
+            self.send_header("Set-Cookie", f"tutordek_session={cookie}; HttpOnly; SameSite=Lax; Path=/{age}{suffix}")
         if location:
             self.send_header("Location", location)
         self.end_headers()
@@ -184,7 +187,7 @@ class Handler(BaseHTTPRequestHandler):
             # Signing in rotates the browser session, revoking its previous token.
             if token:
                 service.logout(token)
-            return self.respond(201 if path.endswith("signup") else 200, {"user": new_user}, cookie=new_token)
+            return self.respond(201 if path.endswith("signup") else 200, {"user": new_user}, cookie=new_token, remember=data.get("remember", True) is not False)
         if path == "/api/availability":
             return self.respond(200, service.availability(data))
         if not user:
@@ -220,25 +223,20 @@ class Handler(BaseHTTPRequestHandler):
         self.respond(200, result)
 
     def static(self, path):
-        filename = path.rsplit("/", 1)[-1]
-        if filename in LEGACY:
-            return self.respond(302, "", "text/plain", location="/#" + LEGACY[filename])
-        if path.startswith("/assets/"):
-            root = ASSETS
-            relative = path.removeprefix("/assets/")
-        elif path in ("/", "/index.html"):
-            root = ROOT / "web"
-            relative = "index.html"
-        elif path.startswith("/web/"):
-            root = ROOT / "web"
-            relative = path.removeprefix("/web/")
-        elif path == "/favicon.ico":
-            root = ROOT / "web"
-            relative = "favicon.svg"
-        else:
+        relative = path.removeprefix("/TutorDek Software Engineer/TutorDek-Final-Project-main/").lstrip("/")
+        if relative in ("", "index.html"):
+            relative = "landing-page.html"
+        elif relative == "favicon.ico":
+            relative = "public/school.svg"
+        elif relative.startswith("assets/"):
+            relative = "public/" + relative.removeprefix("assets/")
+        parts = Path(relative).parts
+        if relative not in PAGES and (not parts or parts[0] not in STATIC_DIRECTORIES):
             raise Problem("Halaman tidak ditemukan.", 404)
+        root = FRONTEND
         target = (root / relative).resolve()
-        if not target.is_relative_to(root.resolve()) or not target.is_file():
+        if (not target.is_relative_to(root.resolve()) or not target.is_file()
+                or target.suffix.lower() not in {".html", ".css", ".js", ".svg", ".png", ".jpg", ".jpeg", ".webp", ".woff", ".woff2", ".ttf", ".ico"}):
             raise Problem("Berkas tidak ditemukan.", 404)
         kind = mimetypes.guess_type(target.name)[0] or "application/octet-stream"
         if target.suffix == ".js":

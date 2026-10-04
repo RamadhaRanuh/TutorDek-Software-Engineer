@@ -46,6 +46,18 @@ LESSONS = [
      "questions": [["Xièxie berarti ...", ["halo", "sampai jumpa", "terima kasih", "selamat malam"], 2, "谢谢 (xièxie) berarti terima kasih."], ["Pinyin membantu membaca ...", ["bunyi bahasa", "nomor atom", "persamaan", "jarak"], 0, "Pinyin adalah sistem penulisan bunyi."]]},
 ]
 
+LESSONS.extend([
+    {"id": "perbandingan", "subject": "Matematika", "title": "Perbandingan", "level": "SMP", "minutes": 8,
+     "keywords": ["perbandingan", "rasio", "ratio", "senilai"],
+     "sections": [["Menyederhanakan rasio", "Rasio 6 : 9 dapat disederhanakan dengan membagi kedua bilangan dengan 3 menjadi 2 : 3. Urutan bilangan pada rasio perlu dipertahankan."], ["Perbandingan senilai", "Jika dua buku berharga Rp10.000, enam buku dengan harga satuan sama berharga Rp30.000. Ketika jumlah buku dikalikan tiga, harganya juga dikalikan tiga."]],
+     "questions": [["Bentuk sederhana 8 : 12 adalah ...", ["2 : 3", "3 : 2", "1 : 3", "4 : 3"], 0, "Bagi 8 dan 12 dengan 4."], ["Tiga pensil Rp6.000. Enam pensil seharga ...", ["Rp3.000", "Rp6.000", "Rp9.000", "Rp12.000"], 3, "Jumlah pensil dan harga dikalikan dua."]]},
+    {"id": "kartesius", "subject": "Matematika", "title": "Koordinat Kartesius", "level": "SMP", "minutes": 8,
+     "keywords": ["koordinat", "kartesius", "cartesian", "sumbu", "kuadran"],
+     "sections": [["Pasangan koordinat", "Titik (x, y) menyatakan posisi terhadap titik asal (0, 0). x menunjukkan arah horizontal dan y menunjukkan arah vertikal. Titik (3, 2) berada tiga satuan ke kanan dan dua satuan ke atas."], ["Kuadran", "Kuadran I memiliki x dan y positif. Di kuadran II x negatif dan y positif. Di kuadran III keduanya negatif. Di kuadran IV x positif dan y negatif."]],
+     "questions": [["Titik (4, -2) berada pada kuadran ...", ["I", "II", "III", "IV"], 3, "x positif dan y negatif menunjukkan kuadran IV."], ["Koordinat titik asal adalah ...", ["(1, 1)", "(0, 0)", "(-1, 0)", "(0, 1)"], 1, "Titik asal adalah perpotongan kedua sumbu."]]},
+])
+SUBJECTS["Matematika"].extend(["perbandingan", "kartesius"])
+
 TUTORS = [
     {"id": "anita", "name": "Anita Frens Hatipuan", "subject": "Matematika", "levels": ["SMA"], "rating": 4.8, "price": 85000, "years": 6, "qualification": "Pendidikan Matematika", "image": "image2@2x.png", "modes": ["Online", "Offline"], "city": "Jakarta", "slots": [9, 11, 14, 16, 19]},
     {"id": "bella", "name": "Bella Sihombing", "subject": "Fisika", "levels": ["SMA"], "rating": 4.7, "price": 90000, "years": 5, "qualification": "Pendidikan Fisika", "image": "image3@2x.png", "modes": ["Online"], "city": "Bandung", "slots": [10, 13, 15, 18]},
@@ -64,6 +76,31 @@ PACKAGES = [
     {"id": "smp", "name": "Siap Belajar SMP", "description": "Aljabar, geometri, dan bahasa untuk langkah berikutnya.", "lessons": ["aljabar", "pythagoras", "english"], "level": "SMP"},
     {"id": "sma", "name": "Eksplorasi Sains SMA", "description": "Pahami hubungan gerak, kehidupan, dan materi.", "lessons": ["gerak", "sel", "atom"], "level": "SMA"},
 ]
+
+# The original booking page's English tutor cards remain available by their names.
+TUTORS.extend([
+    {"id": identifier, "name": name, "subject": "Inggris", "levels": ["SMP"],
+     "rating": 4.8, "price": 70000, "years": 3, "qualification": "Pendidikan Bahasa Inggris",
+     "image": "image2@2x.png", "modes": ["Online", "Offline"], "city": "Jakarta",
+     "slots": [9, 11, 14, 16, 19]}
+    for identifier, name in (("fransiska", "Fransiska Putri"), ("kirana", "Kirana Syahrini"), ("yajna", "Yajna Safitri"))
+])
+
+# Preserve the six original package cards and their advertised prices. Enrollment
+# is access to a sample collection, not a purchased subscription or live class.
+PACKAGES.extend([
+    {"id": identifier, "name": name, "price": price, "category": category,
+     "description": "Pratinjau materi demo. Langganan berbayar belum tersedia.",
+     "lessons": lessons, "level": level}
+    for identifier, name, price, category, lessons, level in (
+        ("utbk-reguler", "Live Class Reguler UTBK", 1200000, "utbk", ["gerak", "sel", "atom"], "SMA"),
+        ("utbk-premium", "Live Class Premium UTBK", 4000000, "utbk", ["gerak", "sel", "atom", "aljabar"], "SMA"),
+        ("live-prime", "Prime UTBK", 439000, "live", ["aljabar", "english"], "SMP"),
+        ("live-lite", "Prime UTBK Lite", 339000, "live", ["bilangan", "sains"], "SD"),
+        ("belajar-tahun", "Siap Belajar 1 Tahun", 229000, "belajar", ["aljabar", "pythagoras", "english"], "SMP"),
+        ("belajar-bulan", "Siap Belajar 6 Bulan", 229000, "belajar", ["aljabar", "english"], "SMP"),
+    )
+])
 
 PROMOS = [{"code": "BELAJAR20", "percent": 20, "cap": 25000, "description": "Diskon 20% hingga Rp25.000 untuk setiap pemesanan demo."}]
 
