@@ -1,0 +1,9 @@
+node_modules/
+__pycache__/
+*.pyc
+.env
+data/
+test-results/
+playwright-report/
+artifacts/
+*.sqlite3*
