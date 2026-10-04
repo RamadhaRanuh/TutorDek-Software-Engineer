@@ -1,6 +1,6 @@
 # TutorDek completion specification: repair the original interface
 
-Status: implementation under verification
+Status: implemented and verified locally; remote delivery checked after push
 Source: [Finish TutorDek](map.md) and [the original-interface correction](issues/05-original-interface.md)
 
 ## Problem and outcome
@@ -25,4 +25,4 @@ The original-interface constraint is an acceptance requirement, not a color pale
 
 ## Implementation evidence
 
-Pending the corrected acceptance gate. The earlier 26 API/14 SPA browser results do not verify this restored interface. Updated results will be recorded in [verification](../../docs/verification.md).
+The corrected acceptance gate passed on 5 October 2026: 27 backend tests, 50 desktop/mobile browser tests, formatting, and whitespace checks. Original page and popup screenshots were inspected. See [verification](../../docs/verification.md) for scope and limitations. The final corrective commit chain is pushed normally and its author/committer identity, remote hash, and CI result are checked during delivery.

@@ -1,7 +1,7 @@
 # Finish TutorDek: a working learning journey
 
 Label: wayfinder:map
-Status: decisions resolved; original-interface correction being verified
+Status: decisions resolved; original-interface implementation verified
 
 ## Destination
 
@@ -14,7 +14,7 @@ A locally runnable TutorDek application repaired in its original HTML, CSS, Java
 - Claim each ticket before resolving it; record dependencies, answers, and evidence in its file. Link resolutions here by title.
 - The user's correction supersedes the previous interface recommendation: restore the code from `1226597`, repair it in place, and remove the replacement SPA. Preserving only colors and assets is insufficient. Keep the actual page structures, hero composition, cards, art, and original style sheets. Scope responsive and accessibility overrides to their existing elements.
 - Git author and committer use the existing user identity: Rama Ranuh <ramadha.ranuh@gmail.com>. No assistant co-author trailer.
-- Verification must exercise the restored HTML pages, not the earlier replacement SPA. Previous test results describe the previous implementation only. Record corrected evidence after checks finish.
+- Verification must exercise the restored HTML pages, not the earlier replacement SPA. Previous test results describe the previous implementation only. Corrected evidence: 27 backend and 50 desktop/mobile browser tests passed, with inspected original page/popup screenshots; see [verification](../../docs/verification.md).
 
 ## Decisions so far
 

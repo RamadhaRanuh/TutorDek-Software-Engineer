@@ -1,81 +1,67 @@
 # TutorDek
 
-TutorDek is a runnable Indonesian tutoring and learning application. Create a learner account, find a tutor, book a one-hour session, and keep your learning activity in one place.
+TutorDek runs the project's original HTML, CSS, JavaScript, cards, and artwork with repaired account, booking, catalogue, and learning interactions. The original desktop composition remains; responsive overrides let the same pages work on smaller screens. The replacement SPA has been removed.
 
 ## Run locally
 
-Requires **Python 3.10 or newer**. No Python packages, MySQL, API keys, or frontend build are needed.
+Requires **Python 3.10 or newer**. No Python packages, MySQL, API keys, or frontend build are required.
 
 ```sh
 python server.py
 ```
 
-Open **http://127.0.0.1:8000**. Create an account through **Daftar**; there are no shared default passwords. Your account, sessions, bookings, messages, notes, and progress persist in `data/tutordek.sqlite3`. This directory is ignored by Git. Back up the database with the server stopped.
+Open **http://127.0.0.1:8000**. Use **Masuk → Daftar** to create an account. There are no shared default passwords. The account, bookings, notes, messages, lesson progress, quiz attempts, and forum activity persist in `data/tutordek.sqlite3`, which is ignored by Git. Stop the server before copying the database for backup.
 
 ```sh
 python server.py --port 8080
 python server.py --temporary --port 8001
 ```
 
-`--temporary` runs an isolated demonstration without modifying saved data. `TUTORDEK_DB` selects a different database file. Opening HTML files directly or using a static-only server does not provide the app's API.
+`--temporary` uses disposable storage. `TUTORDEK_DB` selects a different database file. Opening the HTML directly or using a static-only server displays the design but does not supply the persistence API. Both the original nested page URLs and root-level filenames work; `/` serves `landing-page.html`.
 
-## Working features
+## Use the original interface
 
-- Accounts: registration, login, logout, expiring protected sessions, server validation and hashed passwords.
-- Tutor discovery: name, subject, school level, mode, price, rating and date/slot filtering; tutor profiles; manual or automatic matching.
-- Booking: dependent grade/topic choices, online/offline sessions, WIB scheduling, address validation, atomic conflict prevention, server pricing, promos, simulated checkout, cancellation and completion.
-- Dashboard and study room: saved sessions, statuses, notes, local whiteboard with PNG export, and persistent outgoing messages.
-- Learning: nine original text lessons, printable/downloadable HTML ebooks, three free study packages, BrainBoost and an 18-question tryout with server scoring, saved results, completions and goals.
-- Community: forum questions, replies and reviews linked to completed bookings.
-- Learning assistant: retrieves explanations from bundled lessons, links sources, and saves history.
-- Interface: Indonesian copy, desktop/mobile layouts, keyboard navigation, native dialogs and FAQ, loading/error/empty states, visible focus and reduced motion.
+- Original signup/sign-in forms validate and save accounts. Password visibility, Remember Me, useful errors, logout, and the signed-in **Akun Saya** button work.
+- The original hero search finds tutors, subjects, packages, and sample materials. Tutor profiles open their original popups; **Pesan Sekarang** preselects the chosen tutor.
+- Original manual/automatic booking pages keep their five steps. Grade/topic changes reset dependent choices. Both Online and Offline need a future WIB schedule; Offline also needs an address. Matching and server transactions prevent incompatible or overlapping reservations.
+- Checkout previews rates and promos, saves a reservation, and confirms a demo payment. Guest selections survive signup. **Akun Saya** lists saved sessions and supports notes, cancellation, completion after the session ends, and one review per completed session.
+- Original package filters/details keep the six cards and advertised prices. **Simpan koleksi demo** saves access to sample lessons; it does not activate a paid subscription. E-Book cards/category/audio controls open relevant samples, reading, browser narration, and text downloads.
+- The original **Fitur** popup and feature tabs open lessons, completion, server-graded exercises/TryOut/BrainBoost, progress targets, saved outgoing tutor messages, forum questions/replies, and sourced Robot Tutor explanations.
+- Original FAQ, profile/feature dialogs, promo claims, carousels, footer controls, keyboard activation, Escape/focus restoration, and reduced-motion behavior work. Bootstrap and the original fonts are bundled locally with their licenses.
 
-## Demonstration boundaries
+## Service boundaries
 
-Tutor profiles, qualifications, ratings, rates and hourly availability are **demo data**, based on the original catalogue. A booking reserves a slot inside this application, not a real tutor. Automatic matching selects a compatible available tutor by demo rating, then price.
+Tutor profiles, qualifications, ratings, hourly rates, and availability are **demo data**. Saving a booking reserves a slot in this local application; actual tutor delivery is not connected. Automatic matching uses subject, school level, mode, rating, price, and availability. The original map area presents matching information; nearest-location maps need a configured map service.
 
-Checkout is a **simulation**: no real money, card numbers, bank credentials or refunds are processed. `BELAJAR20` applies a server-calculated 20% discount, capped at Rp25,000. All dates and times use **Asia/Jakarta (WIB, UTC+7)**. Reservations must be in the future and within 90 days. A confirmed session can be completed only after its scheduled end; then its owner can leave one review.
+Checkout is a **simulation**. No real money, card/account numbers, credentials, or refunds are processed. `BELAJAR20` gives a server-calculated 20% discount capped at Rp25,000 for tutoring demo bookings. Dates and times are **Asia/Jakarta (WIB, UTC+7)**. Select an advertised whole-hour slot in the future and within 90 days. A confirmed session can be completed after its scheduled end, then reviewed once by its owner.
 
-The study room supplies notes and a drawing board; it does **not** provide video/audio conferencing or multiplayer drawing. Outgoing messages persist, but no tutor account or synthetic reply is provided. Whiteboard drawings stay in the browser until downloaded. The assistant is **material retrieval, not an LLM**. Content is original sample text, not licensed publisher ebooks or a video library. The old paid subscription mockups are replaced with free self-study collections; tutoring is booked separately.
+The bundled lessons are original sample text, not licensed publisher books or a video library. Package and ebook prices remain part of the original catalogue design; paid subscriptions and purchases are not active. Audio samples use browser speech synthesis where available. Messages persist as outgoing records; tutor replies and live calls are not connected. Robot Tutor retrieves relevant bundled explanations and sources; it is not a generative model. Google login, recovery email, live video, payments, real tutor onboarding, and model-backed RAG need external services. Their existing controls explain these limits.
 
-Production payments, email/password recovery, verified tutor onboarding, tutor/admin portals, live video, production deployment, and model-backed RAG require additional infrastructure and are outside this local completion effort. No nonworking controls promise those services.
+## Verify
 
-## Tests
-
-Backend tests need only Python:
-
-```sh
-python -m unittest discover -s tests -p "test_*.py" -v
-```
-
-Browser tests require **Node.js 20+**:
+Requires Node.js for development checks only.
 
 ```sh
 npm ci
 npx playwright install chromium
 npm test
+npm run format:check
 ```
 
-Playwright starts a temporary database/server on port 8765, runs desktop Chromium and mobile Chromium emulation, and stops the server when finished. Tests cover user journeys, escaped content, downloads, persistence, layout overflow, reduced motion and axe accessibility rules. Python checks also exercise simultaneous reservations, account isolation, malformed requests, pricing, state transitions, expiry and server-scored exercises.
+On Linux, use `npx playwright install --with-deps chromium`. Python tests cover persistence, authentication, ownership, server validation, concurrency, pricing, and lifecycle boundaries. Browser tests operate the restored HTML pages on desktop/mobile, check original desktop geometry and artwork, inspect all page assets, and exercise original interactions. Separate temporary servers isolate desktop/mobile storage. Screenshots are generated under ignored `artifacts/original/`; failures retain Playwright traces. CI repeats the gate on Linux. See [verification](docs/verification.md) and the amended [wayfinder specification](.scratch/finish-tutordek/spec.md).
 
-Reports and screenshots in `playwright-report/`, `test-results/`, and `artifacts/` are ignored. [Verification notes](docs/verification.md) record the evidence. GitHub Actions runs the same tests on Linux. Mobile emulation does not substitute for physical-device or Safari/Firefox testing.
-
-## Project structure
+## Code map
 
 | Path | Purpose |
 | --- | --- |
-| `server.py` | App entrypoint |
-| `tutordek/service.py` | Validated domain operations and persistence |
-| `tutordek/http.py` | Same-origin JSON API and allowlisted static serving |
-| `tutordek/schema.sql` | Active SQLite schema |
-| `tutordek/content.py` | Original lessons and demo catalogue |
-| `web/` | App shell, route modules and responsive styles |
-| `tests/` | Isolated backend and browser tests |
-| `.scratch/finish-tutordek/` | Wayfinder map, resolutions and reviewed spec |
-| `GLOSSARY.md` | Domain vocabulary |
-| `TutorDek Software Engineer/TutorDek-Final-Project-main/` | Original assets, historical CSS/JS, MySQL references and legacy URLs |
-| `Personal-Chatbot_LLM_RAG/` | Separate exploratory RAG notebook; not an app dependency |
+| `TutorDek Software Engineer/TutorDek-Final-Project-main/*.html` | Active original pages, repaired in place |
+| `CSS/`, `fitur/*.css` inside that directory | Original generated styles, preserved |
+| `CSS/repairs.css` inside that directory | Responsive, popup, focus, and form overrides |
+| `Javascript/`, `Sign-in fiture/`, `Sign-up fiture/` | Original interaction files plus service/action adapters |
+| `public/`, `fitur/public/`, `vendor/` | Original artwork and bundled licensed fonts/Bootstrap |
+| `server.py`, `tutordek/` | Local entrypoint, same-origin API, SQLite persistence, validation, sample content |
+| `tests/` | Backend and restored-page browser regressions |
+| `.scratch/finish-tutordek/` | Wayfinder decisions and corrected original-interface specification |
+| `Personal-Chatbot_LLM_RAG/` | Separate exploratory notebook; not a runtime dependency |
 
-Original HTML URLs redirect to current screens, including both booking flows. Old generated CSS/JS and MySQL dumps are historical references and are not loaded by the application. Their schema shortcomings and migration boundaries are documented in the [wayfinder audit](.scratch/finish-tutordek/issues/01-completion-boundary.md).
-
-The Python HTTP server is intended for local development and demonstration. For external hosting, use an appropriate production server/reverse proxy with HTTPS, set `TUTORDEK_PUBLIC_HOST` to the public host (including a nondefault port if applicable) and `TUTORDEK_SECURE_COOKIE=1`, and perform a deployment review. Avoid exposing the repository or database through another static server.
+The original MySQL references remain in the repository; the active local app uses SQLite. The development server serves only allowlisted frontend files and does not expose the repository or database. External production hosting is separate work; use HTTPS and an appropriate production server/reverse proxy, with `TUTORDEK_PUBLIC_HOST` and `TUTORDEK_SECURE_COOKIE=1` configured for that deployment.
