@@ -49,7 +49,7 @@ npm test
 npm run format:check
 ```
 
-On Linux, use `npx playwright install --with-deps chromium`. Python tests cover persistence, authentication, ownership, server validation, concurrency, pricing, and lifecycle boundaries. Browser tests operate the original pages on desktop/mobile, check landing geometry and artwork, inspect page assets, and exercise learner interactions. Catalogue checks cover 320–1440px widths, clipped artwork, text collisions, filters/actions, and targeted accessibility. Separate temporary servers isolate desktop/mobile storage. Screenshots are generated under ignored `artifacts/original/` and `artifacts/ui-fixes/`; failures retain Playwright traces. CI repeats the gate on Linux. See [verification](docs/verification.md) and the amended [wayfinder specification](.scratch/finish-tutordek/spec.md).
+On Linux, use `npx playwright install --with-deps chromium`. Python tests cover persistence, authentication, ownership, server validation, concurrency, pricing, and lifecycle boundaries. Browser tests operate the original pages on desktop/mobile, check landing geometry and artwork, inspect page assets, and exercise learner interactions. Catalogue checks cover 320–1440px widths, clipped artwork, text collisions, filters/actions, and targeted accessibility. Separate temporary servers isolate desktop/mobile storage. Screenshots are generated under ignored `artifacts/original/` and `artifacts/ui-fixes/`; failures retain Playwright traces. CI repeats the gate on Linux. See [verification](docs/verification.md).
 
 ## Code map
 
@@ -60,10 +60,11 @@ On Linux, use `npx playwright install --with-deps chromium`. Python tests cover 
 | `CSS/repairs.css` inside that directory | Responsive, popup, focus, and form overrides |
 | `CSS/pages.css`, `CSS/booking.css` inside that directory | Fluid catalogue layouts and automatic booking guidance |
 | `Javascript/`, `Sign-in fiture/`, `Sign-up fiture/` | Original interaction files plus service/action adapters |
+| `Javascript/booking.js` inside that directory | Shared manual and automatic booking behavior |
 | `public/`, `fitur/public/`, `vendor/` | Original artwork and bundled licensed fonts/Bootstrap |
 | `server.py`, `tutordek/` | Local entrypoint, same-origin API, SQLite persistence, validation, sample content |
 | `tests/` | Backend and restored-page browser regressions |
-| `.scratch/finish-tutordek/` | Wayfinder decisions and corrected original-interface specification |
-| `Personal-Chatbot_LLM_RAG/` | Separate exploratory notebook; not a runtime dependency |
 
-The original MySQL references remain in the repository; the active local app uses SQLite. The development server serves only allowlisted frontend files and does not expose the repository or database. External production hosting is separate work; use HTTPS and an appropriate production server/reverse proxy, with `TUTORDEK_PUBLIC_HOST` and `TUTORDEK_SECURE_COOKIE=1` configured for that deployment.
+The active schema is `tutordek/schema.sql` (SQLite). Planning scratch files, the standalone RAG prototype, obsolete MySQL files, copied library demos, duplicate booking/popup scripts, and unreferenced UI assets have been removed. Local scratch files and generated reports are ignored by Git. Third-party dependency licenses remain in `vendor/`.
+
+The development server serves only allowlisted frontend files and does not expose the repository or database. External production hosting is separate work; use HTTPS and an appropriate production server/reverse proxy, with `TUTORDEK_PUBLIC_HOST` and `TUTORDEK_SECURE_COOKIE=1` configured for that deployment.

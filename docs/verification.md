@@ -1,6 +1,6 @@
 # Verification of the restored TutorDek interface
 
-Specification: [repair the original interface](../.scratch/finish-tutordek/spec.md).
+Application behavior and service boundaries: [README](../README.md).
 
 ## Fidelity evidence
 
@@ -8,7 +8,7 @@ The active frontend is restored from `1226597`, with repairs in its original HTM
 
 The follow-up repairs regroup the package, ebook, promo, and testimonial fragments into sections/cards within their original standalone documents. Their source content, catalogue prices, fonts, and artwork remain. `CSS/pages.css` supplies fluid layouts; `CSS/booking.css` supplies automatic booking guidance. The original landing hero geometry remains covered by the existing assertions.
 
-Compared against that commit, the generated `CSS/tugas-akhir.css`, `CSS/global.css`, `CSS/fiturOverlay.css`, and all four feature-page style sheets are unchanged after normalizing checkout line endings. Original artwork is unchanged. Auth style changes remove network font imports; local copies of the original fonts replace them. Desktop browser assertions verify the original hero at x=0/y=96 with 1440×622 geometry, booking section y=718, promo section y=1496, hero photograph, eight tutor cards, and the original main stylesheet.
+Compared against that commit, the generated `CSS/tugas-akhir.css`, `CSS/global.css`, `CSS/fiturOverlay.css`, and all four feature-page style sheets are unchanged after normalizing checkout line endings. Retained UI artwork is unchanged; unreferenced exports were removed during repository cleanup. Auth style changes remove network font imports; local copies of the original fonts replace them. Desktop browser assertions verify the original hero at x=0/y=96 with 1440×622 geometry, booking section y=718, promo section y=1496, hero photograph, eight tutor cards, and the original main stylesheet.
 
 Desktop and mobile screenshots cover all ten original pages. The original 1440px landing screenshot was compared with the repaired rendering. The hero, art, cards, section order, and overall desktop composition remain. Mobile layouts adapt those same sections into document flow. Profile/feature popup screenshots were inspected after the final positioning repair, including after scrolling to tutor cards.
 
@@ -42,3 +42,11 @@ Real payments, recovery email, OAuth, proximity maps, real tutor delivery/video,
 On 5 October 2026, `npm run test:api` passed **27 backend tests** and `npm run test:ui` passed **74 browser tests** (37 desktop and 37 mobile; 6.0 minutes), without configured retries. These checks ran against the final behavior changes and corrected test fixtures. `npm run format:check` and `git diff --check` passed. Only delivery documentation changed after the final behavior checks.
 
 The follow-up history separates the wayfinder decision, four catalogue repairs, automatic booking guidance, tutor-strip animation, regression coverage, and delivery documentation. All six commits use Rama Ranuh as author and committer, with no assistant co-author. Remote hash, clean worktree, and the exact pushed CI run are verified during delivery. The service boundaries above still apply.
+
+## Repository cleanup
+
+Planning scratch files, the standalone RAG notebook, obsolete MySQL schemas/diagrams, and the copied particles.js demo/source tree were removed. The active particle library and its MIT notice remain. A reference audit followed HTML resources, CSS URLs, script-created images, SVG links, and catalogue tutor photographs; it identified 63 UI exports with no active reference. Used assets and generated styles remain intact.
+
+Manual and automatic booking now share `Javascript/booking.js`, preserving their mode-specific behavior. The unused combined script and popup handlers overwritten by `repairs.js` were removed, along with ebook carousel code and overrides for markup that no longer exists. HTTP fixtures now check active static files and traversal against the existing server source. README links and the frontend README were corrected; local scratch files are ignored.
+
+The cleanup gate passed on 5 October 2026: `npm test` completed all 27 backend tests and 74 desktop/mobile browser tests (6.1 minutes for browsers), without retries. Formatting and whitespace checks passed. The reference audit reported no missing local resource paths or further unreferenced frontend files; dependency notices and generated styles were retained. Only documentation changed after the behavior gate. The cleanup is delivered through focused user-authored commits, with remote hash and CI checked after push.
