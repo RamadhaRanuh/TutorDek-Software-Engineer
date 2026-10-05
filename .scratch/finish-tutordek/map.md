@@ -14,7 +14,7 @@ A locally runnable TutorDek application repaired in its original HTML, CSS, Java
 - Claim each ticket before resolving it; record dependencies, answers, and evidence in its file. Link resolutions here by title.
 - The user's correction supersedes the previous interface recommendation: restore the code from `1226597`, repair it in place, and remove the replacement SPA. Preserving only colors and assets is insufficient. Keep the actual page structures, hero composition, cards, art, and original style sheets. Scope responsive and accessibility overrides to their existing elements.
 - Git author and committer use the existing user identity: Rama Ranuh <ramadha.ranuh@gmail.com>. No assistant co-author trailer.
-- Verification must exercise the restored HTML pages, not the earlier replacement SPA. Previous test results describe the previous implementation only. Corrected evidence: 27 backend and 50 desktop/mobile browser tests passed, with inspected original page/popup screenshots; see [verification](../../docs/verification.md).
+- Verification must exercise the original HTML pages. The restoration passed 27 backend and 50 browser tests; the targeted UI follow-up passed 27 backend and 74 desktop/mobile browser tests, with inspected page/popup screenshots. See [verification](../../docs/verification.md).
 
 ## Decisions so far
 
@@ -23,6 +23,7 @@ A locally runnable TutorDek application repaired in its original HTML, CSS, Java
 - [How should every learning screen behave on desktop and mobile?](issues/03-interface-and-learning-tools.md): Responsive Indonesian screens with persistent learning tools, accessible controls, and honest service states.
 - [What evidence proves the project is ready to commit and push?](issues/04-verification-and-delivery.md): Isolated backend/browser checks, mobile/accessibility inspection, and a verified user-authored commit chain.
 - [How do we finish the project while keeping the user's original interface?](issues/05-original-interface.md): Serve and repair the original ten HTML pages; retain persistent services behind their original controls and verify desktop composition against the original source.
+- [How do we repair the requested pages and improve tutor animation?](issues/06-targeted-ui-improvements.md): Repair fragmented catalogue layouts in their original HTML pages, improve automatic booking guidance, and add controlled animation to the existing tutor strip.
 
 ## Not yet specified
 

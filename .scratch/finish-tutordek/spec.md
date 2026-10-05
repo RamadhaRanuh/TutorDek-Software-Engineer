@@ -23,6 +23,18 @@ The previous implementation replaced the original pages with a new SPA. The user
 
 The original-interface constraint is an acceptance requirement, not a color palette preference. Preserving the exact original generated desktop style sheets and markup while repairing behavior and adding scoped responsive rules is the recommended approach. The Python/SQLite backend can remain behind that UI because it adds persistence without replacing the frontend. External payments, maps/proximity, OAuth, recovery email, real tutor delivery/video, licensed content, and model-backed RAG remain integration work; show honest states at their existing controls. Agent recommendations were explicitly delegated; this is not a fabricated grilling interview.
 
-## Implementation evidence
+## Follow-up: requested page and animation improvements
+
+The user's next request targets automatic booking, Guru Terbaik Kami, and the four catalogue pages. [Decision 06](issues/06-targeted-ui-improvements.md) extends the original-interface repair:
+
+- Keep the original standalone HTML routes, source artwork/fonts, package names/prices, and learner API. Group exported fragments into responsive sections and cards inside those pages; preserve the landing hero geometry.
+- Automatic booking keeps all five steps and saving behavior, with visible step guidance, compatible tutor previews, field labels, advertised time buttons, a 90-day calendar bound, and a readable confirmation. Date selection followed by a time-button click must work.
+- Animate the original tutor strip smoothly with accurate pagination, native touch scrolling, keyboard controls, pause/resume, and automatic suspension for hover/focus/hidden pages/popups/reduced motion.
+- Render all six original packages and all six story cards without fragment loss. Package filters reflect the actual card categories. Ebook text, audio rows, and sample actions remain independent; promo artwork/claim buttons remain visible; testimonial/video actions work with honest service states.
+- Verify portrait containment, different-node text collisions, section order, viewport bounds, actions, and targeted accessibility on desktop/mobile, including the intermediate catalogue widths. Inspect rendered screenshots and run the full learner-journey gate before focused user-authored commits and push.
+
+Follow-up evidence: 27 backend tests and all 74 browser tests passed on 5 October 2026, without configured retries. Formatting and whitespace checks passed; screenshots were inspected, including the complete 320px checkout. Application backend code and original artwork/generated styles remain unchanged. The oversized-upload test now verifies header rejection before sending a body, removing its Windows socket race. Delivery uses six focused user-authored commits with remote hash and CI checked after push.
+
+## Initial restoration evidence
 
 The corrected acceptance gate passed on 5 October 2026: 27 backend tests, 50 desktop/mobile browser tests, formatting, and whitespace checks. Original page and popup screenshots were inspected. See [verification](../../docs/verification.md) for scope and limitations. The final corrective commit chain is pushed normally and its author/committer identity, remote hash, and CI result are checked during delivery.
