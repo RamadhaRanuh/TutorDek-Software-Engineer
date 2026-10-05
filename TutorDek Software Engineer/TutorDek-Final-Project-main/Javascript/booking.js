@@ -1,5 +1,4 @@
-/* Fix the existing five-step booking form; keep its controls and card artwork. */
-let progress = 0;
+/* Shared behavior for the original manual and automatic five-step booking forms. */
 let selectedClass = '',
   selectedGrade = '',
   selectedLesson = '',
@@ -9,8 +8,7 @@ let selectedTeacher = '',
   selectedAlamat = '',
   selectedDate = '',
   selectedTime = '';
-let selectedEmail = '',
-  selectedPayment = '';
+let selectedPayment = '';
 let catalogue,
   currentStep = 0,
   bookingId;
@@ -39,11 +37,10 @@ function validateForm() {
   return true;
 }
 function updateProgressBar(val) {
-  progress = val;
   const bar = document.querySelector('.progress-bar');
-  bar.style.width = `${progress}%`;
-  bar.textContent = `${progress}%`;
-  document.querySelector('.progress').setAttribute('aria-valuenow', progress);
+  bar.style.width = `${val}%`;
+  bar.textContent = `${val}%`;
+  document.querySelector('.progress').setAttribute('aria-valuenow', val);
 }
 function updateDisplay() {
   const teacher = catalogue.tutors.find((t) => t.id === selectedTeacher);
@@ -77,14 +74,28 @@ function updateDisplay() {
     price.textContent = `Sesi 60 menit: ${money(teacher.price)} · Diskon ${money(discount)} · Total ${money(teacher.price - discount)} (simulasi)`;
   } else price.textContent = 'Harga mengikuti tutor yang tersedia; ditampilkan sebelum konfirmasi.';
 }
-function showPage(index) {
+function showPage(index, moveFocus = true) {
   currentStep = index;
   pages.forEach((page, i) => (page.style.display = i === index ? 'block' : 'none'));
   updateProgressBar(index * 25);
   prevButton.disabled = index === 0;
   nextButton.hidden = index === 4;
+  if (automaticTutor) {
+    nextButton.textContent = index === 3 ? 'Lihat ringkasan →' : 'Lanjutkan →';
+    prevButton.textContent = '← Kembali';
+  }
+  document.querySelectorAll('.booking-steps li').forEach((node, i) => {
+    node.classList.toggle('completed', i < index);
+    node.setAttribute('aria-current', i === index ? 'step' : 'false');
+  });
+  const counter = document.getElementById('bookingStepCounter');
+  if (counter) counter.textContent = `Langkah ${index + 1} dari 5`;
+  if (index === 2 && automaticTutor)
+    nextButton.disabled = !catalogue.tutors.some(
+      (t) => t.subject === selectedLesson && t.levels.includes(selectedClass),
+    );
   const title = pages[index].querySelector('h2');
-  if (title) {
+  if (title && moveFocus) {
     title.tabIndex = -1;
     title.focus();
   }
@@ -131,13 +142,17 @@ function renderTutors() {
     );
   if (automaticTutor) {
     document.getElementById('map').innerHTML =
-      '<p>Tutor dipilih otomatis berdasarkan mata pelajaran, jenjang, dan ketersediaan jadwal. Pratinjau katalog demo; lokasi terdekat belum tersedia.</p>' +
+      `<p class="matching-explanation">${tutors.length} tutor sesuai dengan ${TutorDek.escape(selectedLesson)} · ${TutorDek.escape(selectedClass)}. Tutor dipilih berdasarkan ketersediaan jadwal. Katalog demo; pencarian lokasi terdekat belum terhubung.</p><div class="matching-grid">` +
       tutors
         .map(
           (t) =>
-            `<div class="service-card"><b>${TutorDek.escape(t.name)}</b> · ${money(t.price)}/jam<br>${TutorDek.escape(t.modes.join(' / '))} · Jam WIB: ${t.slots.join(', ')}</div>`,
+            `<article class="match-card"><img src="public/${TutorDek.escape(t.image)}" alt=""><div><h3>${TutorDek.escape(t.name)}</h3><p>${money(t.price)}/jam · ★ ${t.rating}</p><p>${TutorDek.escape(t.modes.join(' / '))}</p><p class="match-hours">Jam WIB: ${t.slots.map((hour) => String(hour).padStart(2, '0') + ':00').join(', ')}</p></div></article>`,
         )
-        .join('');
+        .join('') +
+      '</div>' +
+      (!tutors.length
+        ? '<p>Belum ada tutor untuk pilihan ini. Kembali dan pilih pelajaran atau jenjang lain.</p>'
+        : '');
     return;
   }
   const container = pages[2].querySelector('div[style*="overflow-x"]');
@@ -169,6 +184,41 @@ function renderTutors() {
       'Belum ada tutor untuk pilihan ini. Pilih mata pelajaran atau jenjang lain.';
 }
 const tutorTemplate = document.querySelector('.card-main')?.cloneNode(true);
+
+function scheduleSuggestions() {
+  const container = document.getElementById('scheduleSuggestions');
+  if (!container || !catalogue) return;
+  const hours = [
+    ...new Set(
+      catalogue.tutors
+        .filter(
+          (t) =>
+            t.subject === selectedLesson &&
+            t.levels.includes(selectedClass) &&
+            t.modes.includes(selectedPlace),
+        )
+        .flatMap((t) => t.slots),
+    ),
+  ].sort((a, b) => a - b);
+  document.getElementById('scheduleHint').textContent =
+    'Pilih jam yang ditawarkan (WIB). Sesi berlangsung 60 menit; ketersediaan diperiksa sebelum konfirmasi.';
+  container.replaceChildren(
+    ...hours.map((hour) => {
+      const value = String(hour).padStart(2, '0') + ':00';
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'time-suggestion';
+      button.textContent = value;
+      button.setAttribute('aria-pressed', String(value === selectedTime));
+      button.onclick = () => {
+        const input = document.querySelector('.form-time');
+        input.value = value;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      };
+      return button;
+    }),
+  );
+}
 
 async function finishProcess() {
   const button = document.querySelector('.selesai');
@@ -245,7 +295,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (error) {
       TutorDek.status(pages[currentStep], error.message, true);
     } finally {
-      next.disabled = false;
+      next.disabled =
+        currentStep === 2 &&
+        automaticTutor &&
+        !catalogue.tutors.some(
+          (t) => t.subject === selectedLesson && t.levels.includes(selectedClass),
+        );
       next.hidden = currentStep === 4;
     }
   };
@@ -282,6 +337,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     month: '2-digit',
     day: '2-digit',
   }).format(new Date());
+  if (automaticTutor) {
+    const maxDate = new Date(document.querySelector('.form-date').min + 'T12:00:00+07:00');
+    maxDate.setUTCDate(maxDate.getUTCDate() + 90);
+    document.querySelector('.form-date').max = maxDate.toISOString().slice(0, 10);
+  }
   const time = document.querySelector('.form-time');
   time.min = '08:00';
   time.max = '20:00';
@@ -292,6 +352,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     selectedClass = event.target.value;
     selectedGrade = '';
     selectedTeacher = '';
+    const gradeLabel = document.querySelector('.grade-label');
+    if (gradeLabel) gradeLabel.hidden = !selectedClass;
     const grades = { SD: [1, 2, 3, 4, 5, 6], SMP: [7, 8, 9], SMA: [10, 11, 12] };
     document.querySelector('.btn-group').innerHTML = (grades[selectedClass] || [])
       .map(
@@ -321,10 +383,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('offlineFormControl').style.display =
       selectedPlace === 'Offline' ? 'block' : 'none';
     document.getElementById('onlineFormControl').style.display = selectedPlace ? 'block' : 'none';
+    scheduleSuggestions();
   };
   document.querySelector('.form-alamat').oninput = (event) => (selectedAlamat = event.target.value);
   document.querySelector('.form-date').onchange = (event) => (selectedDate = event.target.value);
-  time.onchange = (event) => (selectedTime = event.target.value);
+  time.onchange = (event) => {
+    selectedTime = event.target.value;
+    scheduleSuggestions();
+  };
   document.querySelectorAll('.dropdown-item').forEach(
     (item) =>
       (item.onclick = (event) => {
@@ -333,7 +399,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.querySelector('.dropdown-toggle').textContent = selectedPayment + ' (simulasi)';
       }),
   );
-  showPage(0);
+  showPage(0, !automaticTutor);
   next.disabled = true;
   try {
     catalogue = await TutorDek.request('catalogue');

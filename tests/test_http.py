@@ -36,12 +36,12 @@ class HTTPTests(unittest.TestCase):
         return result
 
     def test_api_and_allowlisted_static_files(self):
-        for path in ("/", "/Javascript/popup.js", "/CSS/global.css", "/public/content@2x.png", "/api/health", "/api/catalogue"):
+        for path in ("/", "/Javascript/client.js", "/CSS/global.css", "/public/content@2x.png", "/api/health", "/api/catalogue"):
             status, headers, body = self.request("GET", path)
             self.assertEqual(status, 200, path)
             self.assertIn("Content-Security-Policy", headers)
             self.assertTrue(body)
-        for path in ("/server.py", "/data/tutordek.sqlite3", "/web/../../server.py", "/assets/%2e%2e/ExportDBTutorDek.sql", "/.git/config"):
+        for path in ("/server.py", "/data/tutordek.sqlite3", "/web/../../server.py", "/CSS/%2e%2e/%2e%2e/%2e%2e/server.py", "/.git/config"):
             self.assertEqual(self.request("GET", path)[0], 404, path)
         self.assertEqual(self.request("GET", "/api/health", headers={"Host": "hostile.example"})[0], 403)
 

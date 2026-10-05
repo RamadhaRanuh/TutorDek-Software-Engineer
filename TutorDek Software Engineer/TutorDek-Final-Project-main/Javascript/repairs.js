@@ -596,14 +596,6 @@
       node.onclick = () => run(() => materials('', '', ['', 'SD', 'SMP', 'SMA'][index]));
       keyboard(node, 'Buka kategori materi ' + node.textContent.trim());
     });
-    let selectedBook = 0;
-    document.querySelectorAll('.slider2 .button143').forEach((node, index) => {
-      node.onclick = () => {
-        selectedBook = (selectedBook + (index === 0 ? -1 : 1) + 2) % 2;
-        run(() => materials(selectedBook === 0 ? 'Matematika' : 'Sains'));
-      };
-      keyboard(node, index === 0 ? 'Buku sebelumnya' : 'Buku berikutnya');
-    });
   }
   const faqSearch = document.querySelector('.button46 .text48');
   if (faqSearch) {
