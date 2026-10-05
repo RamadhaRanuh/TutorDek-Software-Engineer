@@ -1,135 +1,183 @@
-<!DOCTYPE html>
-
-<html lang="id" class="booking-page">
+<!doctype html>
+<html lang="id" class="booking-page automatic-booking">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-    <link rel="stylesheet" href="vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" />
 
-    <title>Pesan Kelas</title>
+    <title>Pesan Kelas Otomatis · TutorDek</title>
 
     <link rel="stylesheet" href="./CSS/global.css" />
-    <link rel="stylesheet" href="./CSS/tugas-akhir.css"/>
-    <link rel="stylesheet" href="./CSS/fiturOverlay.css"/>
-    <link rel="stylesheet" href="./CSS/mainFunction.css"/>
+    <link rel="stylesheet" href="./CSS/tugas-akhir.css" />
+    <link rel="stylesheet" href="./CSS/fiturOverlay.css" />
+    <link rel="stylesheet" href="./CSS/mainFunction.css" />
 
-
-
-
-
-  <link rel="stylesheet" href="vendor/fonts.css">
-<link rel="stylesheet" href="CSS/repairs.css">
-</head>
+    <link rel="stylesheet" href="vendor/fonts.css" />
+    <link rel="stylesheet" href="CSS/repairs.css" />
+    <link rel="stylesheet" href="CSS/booking.css" />
+  </head>
 
   <body>
-    <div id ="particles-js">
+    <div id="particles-js">
       <div class="pesan-navbar">
-        <button type="button" class="btn back" onclick=" location.href='landing-page.html'"><</button>
+        <button type="button" class="btn back" onclick="location.href = 'landing-page.html'">
+          ← Beranda
+        </button>
       </div>
 
-      <div class="container text-center">
-        <img class="asset-icon6" alt="" src="./public/asset5.svg" style="z-index: -1;"/>
-        <div class="progress" role="progressbar" aria-label="Kemajuan pemesanan" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-          <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 0%"></div>
+      <div class="container text-center booking-shell">
+        <header class="booking-intro">
+          <p class="booking-eyebrow">TUTORDEK · PESAN KELAS</p>
+          <h1>Temukan tutor yang cocok untukmu</h1>
+          <p>Pilih kebutuhan belajar dan jadwalmu. Kami cocokkan tutor secara otomatis.</p>
+        </header>
+        <ol class="booking-steps" aria-label="Langkah pemesanan">
+          <li><span>1</span>Jenjang</li>
+          <li><span>2</span>Pelajaran</li>
+          <li><span>3</span>Tutor</li>
+          <li><span>4</span>Jadwal</li>
+          <li><span>5</span>Konfirmasi</li>
+        </ol>
+        <p class="booking-step-counter" id="bookingStepCounter" aria-live="polite"></p>
+
+        <div
+          class="progress"
+          role="progressbar"
+          aria-label="Kemajuan pemesanan"
+          aria-valuenow="0"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            class="progress-bar progress-bar-striped progress-bar-animated"
+            style="width: 0%"
+          ></div>
         </div>
-        <div class="container text-center page" style="display: block;">
+        <div class="container text-center page" style="display: block">
           <h2>Jenjang Kelas</h2>
           <p>Pilih jenjang kelas yang kamu inginkan</p>
 
-            <select class="form-select" aria-label="Default select example">
-              <option value="" selected>Pilih Kelas</option>
-              <option value="SD">SD</option>
-              <option value="SMP">SMP</option>
-              <option value="SMA">SMA</option>
-            </select>
+          <label for="form-select" class="booking-field-label">Jenjang sekolah</label
+          ><select class="form-select" aria-label="Default select example" id="form-select">
+            <option value="" selected="">Pilih Kelas</option>
+            <option value="SD">SD</option>
+            <option value="SMP">SMP</option>
+            <option value="SMA">SMA</option>
+          </select>
 
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-            </div>
+          <p class="grade-label booking-field-label" hidden="">Pilih kelas</p>
+          <div class="btn-group" role="group" aria-label="Basic radio toggle button group"></div>
         </div>
 
-        <div class="container text-center page" style="display: none;">
-          <h2>Mata Pelajaran & Materi</h2>
+        <div class="container text-center page" style="display: none">
+          <h2>Mata Pelajaran &amp; Materi</h2>
           <p>Pilih Mata Pelajaran dan Materi</p>
-          <select class="form-lesson" aria-label="Default select example">
-            <option value="" selected>Pilih Pelajaran</option>
+          <label for="form-lesson" class="booking-field-label">Mata pelajaran</label
+          ><select class="form-lesson" aria-label="Default select example" id="form-lesson">
+            <option value="" selected="">Pilih Pelajaran</option>
             <option value="Matematika">Matematika</option>
             <option value="Inggris">Inggris</option>
             <option value="Sains">Sains</option>
           </select>
 
-          <select class="form-material" aria-label="Default select example">
-            <option value="" selected>Pilih Materi</option>
+          <label for="form-material" class="booking-field-label">Materi yang ingin dipelajari</label
+          ><select class="form-material" aria-label="Default select example" id="form-material">
+            <option value="" selected="">Pilih Materi</option>
           </select>
         </div>
 
-        <div id ="containerMap" class="container text-center page" style="display: none;">
-          <h2>Tutor</h2>
-          <p>Sedang mencari tutor terdekat...</p>
+        <div id="containerMap" class="container text-center page" style="display: none">
+          <h2>Tutor untuk kebutuhanmu</h2>
+          <p>Lihat tutor yang sesuai. Pencocokan akhir dilakukan setelah kamu memilih jadwal.</p>
           <div id="map"></div>
-
-
-
         </div>
 
-        <div class="container text-center page" style="display: none;">
-          <h2>Metode</h2>
+        <div class="container text-center page" style="display: none">
+          <h2>Metode &amp; Jadwal</h2>
           <p>Pilih Metode Pembelajaran</p>
-          <select class="form-place" aria-label="Default select example">
-            <option value="" selected>Select Place</option>
+          <label for="form-place" class="booking-field-label">Metode belajar</label
+          ><select class="form-place" aria-label="Default select example" id="form-place">
+            <option value="" selected="">Pilih metode belajar</option>
             <option value="Online">Online</option>
             <option value="Offline">Offline</option>
           </select>
-          <div id="offlineFormControl" class="mb-3" style="display: none;">
+          <div id="offlineFormControl" class="mb-3" style="display: none">
             <label for="exampleFormControlInput1" class="form-label">Alamat</label>
-            <input type="text" class="form-alamat" id="exampleFormControlInput1" placeholder="Alamat">
+            <input
+              type="text"
+              class="form-alamat"
+              id="exampleFormControlInput1"
+              placeholder="Alamat"
+            />
           </div>
-          <div id="onlineFormControl" class="mb-3" style="display: none;">
-            <label for="exampleFormControlInput2" class="form-label">Date</label>
-            <input type="date" class="form-date" id="exampleFormControlInput2">
+          <div id="onlineFormControl" class="mb-3" style="display: none">
+            <label for="exampleFormControlInput2" class="form-label">Tanggal belajar (WIB)</label>
+            <input type="date" class="form-date" id="exampleFormControlInput2" />
             <label for="exampleFormControlInput3" class="form-label">Time</label>
-            <input type="time" class="form-time" id="exampleFormControlInput3">
+            <input type="time" class="form-time" id="exampleFormControlInput3" />
+            <div class="schedule-help">
+              <p id="scheduleHint"></p>
+              <div id="scheduleSuggestions" aria-label="Jam yang ditawarkan"></div>
+            </div>
           </div>
         </div>
 
-
-
-
-        <div class="container text-center page" style="display: none;">
-          <div style="display: flex; justify-content: space-between;">
-            <div style="margin-left: 30px;">
+        <div class="container text-center page" style="display: none">
+          <h2>Periksa pemesananmu</h2>
+          <div class="checkout-grid">
+            <div class="checkout-fields">
               <div id="emailFormControl" class="mb-3">
                 <label for="checkoutEmail" class="form-label">Email</label>
-                <input type="email" class="form-email" id="checkoutEmail" placeholder="Email">
+                <input type="email" class="form-email" id="checkoutEmail" placeholder="Email" />
               </div>
               <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle full-width-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <button
+                  class="btn btn-secondary dropdown-toggle full-width-btn"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
                   Metode Pembayaran
                 </button>
                 <ul class="dropdown-menu">
-                  <a style="color: blue; text-align: center;">E-Wallet :</a>
+                  <a style="color: blue; text-align: center">E-Wallet :</a>
                   <li><a class="dropdown-item" href="#">Gopay</a></li>
                   <li><a class="dropdown-item" href="#">Ovo</a></li>
-                  <a style="color: blue; text-align: center;">Transfer Bank / Debit :</a>
+                  <a style="color: blue; text-align: center">Transfer Bank / Debit :</a>
                   <li><a class="dropdown-item" href="#">Mandiri</a></li>
                   <li><a class="dropdown-item" href="#">BRI</a></li>
                   <li><a class="dropdown-item" href="#">BCA</a></li>
-                  <a style="color: blue; text-align: center;">Kredit :</a>
+                  <a style="color: blue; text-align: center">Kredit :</a>
                   <li><a class="dropdown-item" href="#">Visa</a></li>
                   <li><a class="dropdown-item" href="#">Mastercard</a></li>
                 </ul>
               </div>
-              <div id="ewalletFormControl" class="mb-3" style="display: none; margin-top: 20px;">
-                <label for="walletDemo" class="form-label" style="    border: 1px solid #0E4A87;
-                border-radius: .25rem;
-                background-color: #0E4A87;">Nomor pembayaran: </label>
-                <input type="email" class="form-pembayaran-ewallet" id="walletDemo">
-            </div>
-            <div id="debitFormControl" class="mb-3" style="display: none; margin-top: 20px;">
-                <label for="bankDemo" class="form-label" style="    border: 1px solid #0E4A87;
-                border-radius: .25rem;
-                background-color: #0E4A87;">Nomor debit: </label>
-                <input type="email" class="form-pembayaran-debit" id="bankDemo">
-            </div>
+              <div id="ewalletFormControl" class="mb-3" style="display: none; margin-top: 20px">
+                <label
+                  for="walletDemo"
+                  class="form-label"
+                  style="
+                    border: 1px solid #0e4a87;
+                    border-radius: 0.25rem;
+                    background-color: #0e4a87;
+                  "
+                  >Nomor pembayaran:
+                </label>
+                <input type="email" class="form-pembayaran-ewallet" id="walletDemo" />
+              </div>
+              <div id="debitFormControl" class="mb-3" style="display: none; margin-top: 20px">
+                <label
+                  for="bankDemo"
+                  class="form-label"
+                  style="
+                    border: 1px solid #0e4a87;
+                    border-radius: 0.25rem;
+                    background-color: #0e4a87;
+                  "
+                  >Nomor debit:
+                </label>
+                <input type="email" class="form-pembayaran-debit" id="bankDemo" />
+              </div>
             </div>
 
             <ul class="list-group list-group-flush">
@@ -140,35 +188,28 @@
               <li class="list-group-item" id="selectedTeacher"></li>
               <li class="list-group-item" id="selectedPlace"></li>
               <li class="list-group-item" id="selectedDetail"></li>
-
             </ul>
           </div>
 
-          <button type="button" class="btn selesai" onclick="finishProcess()">Selesaikan Proses</button>
+          <button type="button" class="btn selesai" onclick="finishProcess()">
+            Selesaikan Proses
+          </button>
         </div>
 
-
-        <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 20px;">
-          <button type="button" class="btn btn-primary"><</button>
-          <button type="button" class="btn btn-primary">></button>
+        <div class="booking-actions">
+          <button type="button" class="btn btn-primary">&lt;</button>
+          <button type="button" class="btn btn-primary">&gt;</button>
         </div>
-
-
-
       </div>
-
 
       <script src="vendor/bootstrap.bundle.min.js"></script>
     </div>
     <script src="Javascript/particles.js"></script>
     <script src="Javascript/app.js"></script>
 
+    <script src="Javascript/class-random.js"></script>
 
-  <script src="Javascript/class-random.js"></script>
-
-
-
-<script src="Javascript/client.js"></script>
-<script src="Javascript/repairs.js"></script>
-</body>
+    <script src="Javascript/client.js"></script>
+    <script src="Javascript/repairs.js"></script>
+  </body>
 </html>
