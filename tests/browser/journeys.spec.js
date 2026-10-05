@@ -250,8 +250,8 @@ test('original package prices and categories open a saved sample collection', as
   await page.goto('/paket-belajar.html');
   await expect(page.locator('.rp-1200000').first()).toHaveText('Rp 1.200.000');
   await page.locator('.button-parent31').click();
-  await expect(page.locator('.button-parent33')).toBeHidden();
-  await expect(page.locator('.button-parent37')).toBeVisible();
+  await expect(page.locator('.button-parent33')).toBeVisible();
+  await expect(page.locator('.button-parent37')).toBeHidden();
   await page.locator('.button-parent29').click();
   await page.locator('.more-detail').first().click();
   await expect(page.locator('#servicePopup')).toContainText('Live Class Reguler UTBK');

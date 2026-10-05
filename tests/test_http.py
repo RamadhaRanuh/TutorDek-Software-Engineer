@@ -62,7 +62,20 @@ class HTTPTests(unittest.TestCase):
         self.assertEqual(self.request("POST", "/api/login", {}, {"Origin": "https://hostile.example"})[0], 403)
         self.assertEqual(self.request("POST", "/api/login", {}, {"Content-Type": "text/plain"})[0], 415)
         self.assertEqual(self.request("POST", "/api/login", ["invalid"])[0], 400)
-        self.assertEqual(self.request("POST", "/api/login", {"email": "x" * 66000})[0], 413)
+        # Reject oversized uploads from their headers, before reading any body.
+        # Sending the body concurrently with rejection can reset Windows sockets.
+        connection = HTTPConnection("127.0.0.1", self.server.server_port, timeout=5)
+        try:
+            connection.putrequest("POST", "/api/login")
+            connection.putheader("Content-Type", "application/json")
+            connection.putheader("X-TutorDek", "1")
+            connection.putheader("Content-Length", "66000")
+            connection.endheaders()
+            response = connection.getresponse()
+            self.assertEqual(response.status, 413)
+            self.assertIn("Ukuran permintaan", json.loads(response.read())["error"])
+        finally:
+            connection.close()
         self.assertEqual(self.request("GET", "/api/missing")[0], 401)
         self.assertEqual(self.request("POST", "/api/bookings", {})[0], 401)
         self.assertEqual(self.request("GET", "/api/me")[2], b'{"user": null}')
