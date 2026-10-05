@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
   <head>
     <meta charset="utf-8" />
@@ -7,20 +7,15 @@
     <link rel="stylesheet" href="./fitur/global.css" />
     <link rel="stylesheet" href="./fitur/paket-belajar.css" />
 
-
-
-
-
-  <link rel="stylesheet" href="vendor/fonts.css">
-<link rel="stylesheet" href="CSS/repairs.css">
-</head>
+    <link rel="stylesheet" href="vendor/fonts.css" />
+    <link rel="stylesheet" href="CSS/repairs.css" />
+    <link rel="stylesheet" href="CSS/pages.css" />
+  </head>
   <body>
-
-
     <div class="popup" id="popupFitur">
       <div class="overlay" onclick="toggleFitur()"></div>
       <div class="content11">
-        <div class="close-btn" onclick="toggleFitur()">&times;</div>
+        <div class="close-btn" onclick="toggleFitur()">×</div>
         <div class="content11">
           <div class="row2">
             <div class="menu3">
@@ -40,9 +35,7 @@
               </div>
               <div class="title23">
                 <div class="description2">Live Tutoring</div>
-                <div class="description3">
-                  Bimbingan langsung dengan tutor ahli secara online.
-                </div>
+                <div class="description3">Bimbingan langsung dengan tutor ahli secara online.</div>
               </div>
             </div>
           </div>
@@ -53,9 +46,7 @@
               </div>
               <div class="title23">
                 <div class="description2">Progress Tracking</div>
-                <div class="description3">
-                  Pantau kemajuan belajarmu secara real-time.
-                </div>
+                <div class="description3">Pantau kemajuan belajarmu secara real-time.</div>
               </div>
             </div>
             <div class="menu3">
@@ -70,11 +61,11 @@
               </div>
             </div>
           </div>
-          <div class="menu3" style="align-items: center;">
+          <div class="menu3" style="align-items: center">
             <div class="icon9">
               <img class="robot-icon" alt="" src="./public/emoji-objects.svg" />
             </div>
-            <div class="title23" style="align-items: center;">
+            <div class="title23" style="align-items: center">
               <div class="description2">BrainBoost</div>
               <div class="description3">
                 Tingkatkan kecerdasan dengan latihan otak yang menantang.
@@ -82,29 +73,10 @@
             </div>
           </div>
         </div>
-
-
-
       </div>
     </div>
 
-
-
-
-    <div class="desktop-paket-belajar">
-      <div class="background4">
-        <div class="background-inner"></div>
-        <img class="speckles-icon3" alt="" src="./fitur/public/speckles@2x.png" />
-
-        <div class="ellipse-div"></div>
-        <img class="asset-icon19" alt="" src="./fitur/public/asset5.svg" />
-
-        <img class="asset-icon20" alt="" src="./fitur/public/asset6.svg" />
-
-        <div class="title27"></div>
-      </div>
-
-
+    <div class="desktop-paket-belajar page-layout">
       <div class="navbar3" data-scroll-to="navbarContainer">
         <div class="row4">
           <div class="title28">
@@ -114,11 +86,10 @@
               </div>
               <b class="tutordek10">TutorDek.</b>
             </div>
-
           </div>
 
           <div class="menu-group3">
-            <div class="button145" onclick=" location.href='landing-page.html'">
+            <div class="button145" onclick="location.href = 'landing-page.html'">
               <div class="fitur18">Home</div>
               <img
                 class="vuesaxlineararrow-down-icon18"
@@ -148,7 +119,7 @@
 
               <div class="button-child15"></div>
             </div>
-            <div class="button145" onclick=" location.href='e-book.html'">
+            <div class="button145" onclick="location.href = 'e-book.html'">
               <div class="fitur18">E-Book</div>
               <img
                 class="vuesaxlineararrow-down-icon18"
@@ -158,7 +129,7 @@
 
               <div class="button-child15"></div>
             </div>
-            <div class="button145" onclick=" location.href='promo.html'">
+            <div class="button145" onclick="location.href = 'promo.html'">
               <div class="fitur18">Promo</div>
               <img
                 class="vuesaxlineararrow-down-icon18"
@@ -168,7 +139,7 @@
 
               <div class="button-child15"></div>
             </div>
-            <div class="button145" onclick=" location.href='testimoni.html'">
+            <div class="button145" onclick="location.href = 'testimoni.html'">
               <div class="fitur18">Testimoni</div>
               <img
                 class="vuesaxlineararrow-down-icon18"
@@ -180,9 +151,7 @@
             </div>
           </div>
 
-
-
-          <div class="button151" onclick=" location.href='signup.html' ">
+          <div class="button151" onclick="location.href = 'signup.html'">
             <img
               class="vuesaxlineararrow-left-icon50"
               alt=""
@@ -198,19 +167,138 @@
           </div>
         </div>
         <img class="border-icon3" alt="" src="./fitur/public/border.svg" />
-
       </div>
-      <div class="background5"></div>
-      <img
-        class="shapes-texture-icon3"
-        alt=""
-        src="./fitur/public/shapes-texture3@2x.png"
-      />
-
-      <b class="promo-tutordek">Promo TutorDek</b>
-      <div class="ayo-jangan-lewatkan">
-        Ayo jangan lewatkan promo-promo menarik dari TutorDek!
-      </div>
+      <section class="page-hero package-hero">
+        <div class="hero-copy">
+          <h1>Pilih Paket Belajar di TutorDek Yang Cocok Untuk Anda</h1>
+        </div>
+        <img
+          class="hero-art"
+          alt="Ilustrasi belajar bersama tutor"
+          src="./fitur/public/livecollaborationcuate.svg"
+        />
+      </section>
+      <section class="page-section package-section">
+        <h2 class="section-heading">Kategori Paket</h2>
+        <div class="package-filters" aria-label="Kategori paket">
+          <button class="button-parent29" type="button">Semua</button
+          ><button class="button-parent30" type="button">Siap UTBK + Tryout</button
+          ><button class="button-parent31" type="button">Live Class</button
+          ><button class="button-parent32" type="button">Siap Belajar</button>
+        </div>
+        <div class="package-grid">
+          <article class="package-card group-parent29 button-parent33">
+            <span class="package-badge">Terlaris</span>
+            <div class="package-card-heading">
+              <img class="package-icon" alt="" src="./fitur/public/class-1@2x.png" />
+              <h3 class="live-class-reguler">Live Class Reguler UTBK</h3>
+            </div>
+            <p class="package-description">
+              Mulai perjuanganmu dari sekarang di kelas online interaktif yang siap mengantar kamu
+              sampai PTN impian. Langganan sekarang dengan harga Pre-Order dijamin lebih hemat!
+            </p>
+            <p class="price-label">Harga Paket</p>
+            <p class="rp-1200000">Rp 1.200.000</p>
+            <button class="more-detail" type="button">More Detail</button>
+          </article>
+          <article class="package-card button-parent35">
+            <span class="package-badge">Terlaris</span>
+            <div class="package-card-heading">
+              <img class="package-icon" alt="" src="./fitur/public/class-1@2x.png" />
+              <h3 class="live-class-reguler">Live Class Premium UTBK</h3>
+            </div>
+            <p class="package-description">
+              Kelas online interaktif dengan kuota siswa terbatas juga bisa bantu kamu belajar lebih
+              mantap sampai UTBK. Langganan sekarang dengan harga Pre-Order dijamin lebih hemat!
+            </p>
+            <p class="price-label">Harga Paket</p>
+            <p class="rp-1200000">Rp 4.000.000</p>
+            <button class="more-detail" type="button">More Detail</button>
+          </article>
+          <article class="package-card button-parent37">
+            <div class="package-card-heading">
+              <img class="package-icon" alt="" src="./fitur/public/class-1@2x.png" />
+              <h3 class="live-class-reguler">Prime UTBK</h3>
+            </div>
+            <p class="package-description">
+              Siapin UTBK dari sekarang sampai nanti hari terakhir UTBK, TryOut dan Materi Belajar
+              Lengkap! Video belajar, rangkuman, kuis, Try Out UTBK dan Try Out Ujian Mandiri
+            </p>
+            <p class="price-label">Harga Paket</p>
+            <p class="rp-1200000">Rp 439.000</p>
+            <button class="more-detail" type="button">More Detail</button>
+          </article>
+          <article class="package-card button-parent38">
+            <div class="package-card-heading">
+              <img class="package-icon" alt="" src="./fitur/public/class-1@2x.png" />
+              <h3 class="live-class-reguler">Prime UTBK Lite</h3>
+            </div>
+            <p class="package-description">
+              Siapin UTBK dari sekarang sampai nanti hari terakhir UTBK, TryOut dan Materi Belajar
+              Lengkap! Video belajar, rangkuman, kuis, Try Out UTBK dan Try Out Ujian Mandiri
+            </p>
+            <p class="price-label">Harga Paket</p>
+            <p class="rp-1200000">Rp 339.000</p>
+            <button class="more-detail" type="button">More Detail</button>
+          </article>
+          <article class="package-card button-parent39">
+            <div class="package-card-heading">
+              <img class="package-icon" alt="" src="./fitur/public/class-1@2x.png" />
+              <h3 class="live-class-reguler">Siap Belajar 1 Tahun</h3>
+            </div>
+            <p class="package-description">
+              Belajar seru dan mudah paham bareng TutorDek! Dapatkan akses video, rangkuman dan bank
+              soal selama 1 tahun (365 hari).
+            </p>
+            <p class="price-label">Harga Paket</p>
+            <p class="rp-1200000">Rp 229.000</p>
+            <button class="more-detail" type="button">More Detail</button>
+          </article>
+          <article class="package-card button-parent40">
+            <div class="package-card-heading">
+              <img class="package-icon" alt="" src="./fitur/public/class-1@2x.png" />
+              <h3 class="live-class-reguler">Siap Belajar 6 Bulan</h3>
+            </div>
+            <p class="package-description">
+              Belajar seru dan mudah paham bareng TutorDek! Dapatkan akses video, rangkuman dan bank
+              soal selama 6 Bulan.
+            </p>
+            <p class="price-label">Harga Paket</p>
+            <p class="rp-1200000">Rp 229.000</p>
+            <button class="more-detail" type="button">More Detail</button>
+          </article>
+        </div>
+      </section>
+      <section class="page-section package-promos">
+        <h2 class="section-heading">Promo TutorDek</h2>
+        <p class="section-description">Ayo jangan lewatkan promo-promo menarik dari TutorDek!</p>
+        <div class="offer-grid">
+          <article class="offer-card">
+            <img
+              class="offer-image"
+              alt="Suasana belajar bersama"
+              src="./fitur/public/businesswomensignaturedocument-11@2x.png"
+            />
+            <div class="offer-copy">
+              <h3>Ramadhan Promo</h3>
+              <p>Get Ramadhan Promos with terms and condition that already apply</p>
+              <button class="offer-claim" type="button">Claim</button>
+            </div>
+          </article>
+          <article class="offer-card">
+            <img
+              class="offer-image"
+              alt="Suasana belajar bersama"
+              src="./fitur/public/businesswomensignaturedocument-12@2x.png"
+            />
+            <div class="offer-copy">
+              <h3>Ramadhan Promo</h3>
+              <p>Get Ramadhan Promos with terms and condition that already apply</p>
+              <button class="offer-claim" type="button">Claim</button>
+            </div>
+          </article>
+        </div>
+      </section>
       <div class="footer3">
         <div class="card3">
           <img class="asset-icon21" alt="" src="./fitur/public/asset32.svg" />
@@ -226,8 +314,8 @@
             <div class="title30">
               <b class="text77">Pesan Guru Sekarang juga</b>
               <div class="text78">
-                Pesan guru terbaik kami yang dapat membantu pemahaman kamu soal
-                pelajaran yang dirasa sulit
+                Pesan guru terbaik kami yang dapat membantu pemahaman kamu soal pelajaran yang
+                dirasa sulit
               </div>
             </div>
           </div>
@@ -255,17 +343,13 @@
               <div class="logo-and-supporting-text3">
                 <div class="logo6">
                   <div class="school-wrapper3">
-                    <img
-                      class="school-icon6"
-                      alt=""
-                      src="./fitur/public/school.svg"
-                    />
+                    <img class="school-icon6" alt="" src="./fitur/public/school.svg" />
                   </div>
                   <b class="tutordek10">TutorDek.</b>
                 </div>
                 <div class="supporting-text3">
-                  TutorDek merupakan Sistem Layanan Pembelajaran yang
-                  menyediakan pembelajaran Online maupun Offline
+                  TutorDek merupakan Sistem Layanan Pembelajaran yang menyediakan pembelajaran
+                  Online maupun Offline
                 </div>
               </div>
               <div class="links3">
@@ -457,520 +541,44 @@
           <div class="content7">
             <div class="footer-text3">2023 TutorDek. All rights reserved.</div>
             <div class="button175">
-              <img
-                class="social-icon15"
-                alt=""
-                src="./fitur/public/social-icon.svg"
-              />
+              <img class="social-icon15" alt="" src="./fitur/public/social-icon.svg" />
 
-              <img
-                class="social-icon15"
-                alt=""
-                src="./fitur/public/social-icon1.svg"
-              />
+              <img class="social-icon15" alt="" src="./fitur/public/social-icon1.svg" />
 
-              <img
-                class="social-icon15"
-                alt=""
-                src="./fitur/public/social-icon2.svg"
-              />
+              <img class="social-icon15" alt="" src="./fitur/public/social-icon2.svg" />
 
-              <img
-                class="social-icon18"
-                alt=""
-                src="./fitur/public/social-icon4.svg"
-              />
+              <img class="social-icon18" alt="" src="./fitur/public/social-icon4.svg" />
 
-              <img
-                class="social-icon15"
-                alt=""
-                src="./fitur/public/social-icon3.svg"
-              />
+              <img class="social-icon15" alt="" src="./fitur/public/social-icon3.svg" />
             </div>
           </div>
           <div class="asset11"></div>
         </div>
       </div>
       <div class="active-tabs3" id="activeTabsContainer">
-        <img
-          class="social-icon18"
-          alt=""
-          src="./fitur/public/vuesaxlineararrowup1.svg"
-        />
-      </div>
-
-      <div class="promo-sectionstate42">
-        <img class="speckles-icon4" alt="" src="./fitur/public/speckles2@2x.png" />
-
-        <div class="title31">
-          <div class="title32"></div>
-          <img class="asset-icon23" alt="" src="./fitur/public/asset3.svg" />
-
-          <img class="asset-icon24" alt="" src="./fitur/public/asset3.svg" />
-
-          <img class="asset-icon25" alt="" src="./fitur/public/asset3.svg" />
-        </div>
-      </div>
-      <img
-        class="live-collaborationcuate-icon"
-        alt=""
-        src="./fitur/public/livecollaborationcuate.svg"
-      />
-
-      <b class="pilih-paket-belajar-container">
-        <span>Pilih Paket Belajar di </span>
-        <span class="tutordek12">TutorDek</span>
-        <span> Yang Cocok Untuk Anda</span>
-      </b>
-      <div class="button176">
-
-
-        <img
-          class="vuesaxlineararrow-left-icon50"
-          alt=""
-          src="./fitur/public/vuesaxlineararrowleft2.svg"
-        />
-
-        <div class="selanjutnya52"></div>
-        <img
-          class="vuesaxlineararrow-left-icon50"
-          alt=""
-          src="./fitur/public/vuesaxlineararrowright11.svg"
-        />
-      </div>
-
-      <div class="title34"></div>
-
-
-
-        <div class="kategori-paket">Kategori Paket</div>
-
-
-
-
-      <div class="button-parent29">
-        <div class="button177">
-          <img
-            class="vuesaxlineararrow-left-icon50"
-            alt=""
-            src="./fitur/public/vuesaxlineararrowleft2.svg"
-          />
-
-          <div class="selanjutnya52"></div>
-          <img
-            class="vuesaxlineararrow-left-icon50"
-            alt=""
-            src="./fitur/public/vuesaxlineararrowright11.svg"
-          />
-        </div>
-
-
-        <div class="semua">Semua</div>
-      </div>
-      <div class="button-parent30">
-        <div class="button178">
-          <img
-            class="vuesaxlineararrow-left-icon50"
-            alt=""
-            src="./fitur/public/vuesaxlineararrowleft10.svg"
-          />
-
-          <div class="selanjutnya52"></div>
-          <img
-            class="vuesaxlineararrow-left-icon50"
-            alt=""
-            src="./fitur/public/vuesaxlineararrowright15.svg"
-          />
-        </div>
-        <div class="siap-utbk">Siap Utbk + Tryout</div>
-      </div>
-      <div class="button-parent31">
-        <div class="button179">
-          <img
-            class="vuesaxlineararrow-left-icon50"
-            alt=""
-            src="./fitur/public/vuesaxlineararrowleft2.svg"
-          />
-
-          <div class="selanjutnya52"></div>
-          <img
-            class="vuesaxlineararrow-left-icon50"
-            alt=""
-            src="./fitur/public/vuesaxlineararrowright11.svg"
-          />
-        </div>
-        <div class="live-class">Live Class</div>
-      </div>
-      <div class="button-parent32">
-        <div class="button179">
-          <img
-            class="vuesaxlineararrow-left-icon50"
-            alt=""
-            src="./fitur/public/vuesaxlineararrowleft2.svg"
-          />
-
-          <div class="selanjutnya52"></div>
-          <img
-            class="vuesaxlineararrow-left-icon50"
-            alt=""
-            src="./fitur/public/vuesaxlineararrowright11.svg"
-          />
-        </div>
-        <div class="siap-belajar">Siap Belajar</div>
-      </div>
-      <div class="group-parent27">
-        <div class="group-parent28">
-          <div class="group-parent29">
-            <div class="button-parent33">
-              <div class="button181">
-                <img
-                  class="vuesaxlineararrow-left-icon50"
-                  alt=""
-                  src="./fitur/public/vuesaxlineararrowleft5.svg"
-                />
-
-                <div class="selanjutnya52"></div>
-                <img
-                  class="vuesaxlineararrow-left-icon50"
-                  alt=""
-                  src="./fitur/public/vuesaxlineararrowright10.svg"
-                />
-              </div>
-              <div class="button-parent34">
-                <div class="button182">
-                  <img
-                    class="vuesaxlineararrow-left-icon50"
-                    alt=""
-                    src="./fitur/public/vuesaxlineararrowleft8.svg"
-                  />
-
-                  <div class="selanjutnya52">Lihat Testimoni</div>
-                  <img
-                    class="vuesaxlineararrow-left-icon50"
-                    alt=""
-                    src="./fitur/public/vuesaxlineararrowright12.svg"
-                  />
-                </div>
-                <div class="title35">
-                  <div class="terlaris">Terlaris</div>
-                </div>
-              </div>
-            </div>
-            <div class="title-group">
-              <div class="title36">
-                <div class="live-class-reguler">Live Class Reguler UTBK</div>
-              </div>
-              <div class="title37">
-                <div class="more-detail">More Detail</div>
-              </div>
-              <div class="title38">
-                <div class="live-class-reguler">Harga Paket</div>
-              </div>
-              <div class="title39">
-                <div class="rp-1200000">Rp 1.200.000</div>
-              </div>
-              <div class="title40">
-                <div class="mulai-perjuanganmu-dari">
-                  Mulai perjuanganmu dari sekarang di kelas online interaktif
-                  yang siap mengantar kamu sampai PTN impian. Langganan sekarang
-                  dengan harga Pre-Order dijamin lebih hemat!
-                </div>
-              </div>
-              <img class="class-1-icon" alt="" src="./fitur/public/class-1@2x.png" />
-            </div>
-          </div>
-          <div class="button-parent35">
-            <div class="button181">
-              <img
-                class="vuesaxlineararrow-left-icon50"
-                alt=""
-                src="./fitur/public/vuesaxlineararrowleft5.svg"
-              />
-
-              <div class="selanjutnya52">Lihat Testimoni</div>
-              <img
-                class="vuesaxlineararrow-left-icon50"
-                alt=""
-                src="./fitur/public/vuesaxlineararrowright10.svg"
-              />
-            </div>
-            <div class="button-parent34">
-              <div class="button182">
-                <img
-                  class="vuesaxlineararrow-left-icon50"
-                  alt=""
-                  src="./fitur/public/vuesaxlineararrowleft8.svg"
-                />
-
-                <div class="selanjutnya52">Lihat Testimoni</div>
-                <img
-                  class="vuesaxlineararrow-left-icon50"
-                  alt=""
-                  src="./fitur/public/vuesaxlineararrowright12.svg"
-                />
-              </div>
-              <div class="title35">
-                <div class="terlaris">Terlaris</div>
-              </div>
-            </div>
-            <div class="title-container">
-              <div class="title36">
-                <div class="live-class-reguler">Live Class Premium UTBK</div>
-              </div>
-              <div class="title37">
-                <div class="more-detail">More Detail</div>
-              </div>
-              <div class="title38">
-                <div class="live-class-reguler">Harga Paket</div>
-              </div>
-              <div class="title39">
-                <div class="rp-1200000">Rp 4.000.000</div>
-              </div>
-              <div class="title40">
-                <div class="mulai-perjuanganmu-dari">
-                  Kelas online interaktif dengan kuota siswa terbatas juga bisa
-                  bantu kamu belajar lebih mantap sampai UTBK. Langganan
-                  sekarang dengan harga Pre-Order dijamin lebih hemat!
-                </div>
-              </div>
-              <img class="class-1-icon" alt="" src="./fitur/public/class-1@2x.png" />
-            </div>
-          </div>
-          <div class="button-parent37">
-            <div class="button181">
-              <img
-                class="vuesaxlineararrow-left-icon50"
-                alt=""
-                src="./fitur/public/vuesaxlineararrowleft5.svg"
-              />
-
-              <div class="selanjutnya52">Lihat Testimoni</div>
-              <img
-                class="vuesaxlineararrow-left-icon50"
-                alt=""
-                src="./fitur/public/vuesaxlineararrowright10.svg"
-              />
-            </div>
-            <div class="title-parent1">
-              <div class="title47">
-                <div class="live-class-reguler">Prime UTBK</div>
-              </div>
-              <div class="title37">
-                <div class="more-detail">More Detail</div>
-              </div>
-              <div class="title38">
-                <div class="live-class-reguler">Harga Paket</div>
-              </div>
-              <div class="title39">
-                <div class="rp-1200000">Rp 439.000</div>
-              </div>
-              <div class="title51">
-                <div class="mulai-perjuanganmu-dari">
-                  Siapin UTBK dari sekarang sampai nanti hari terakhir UTBK,
-                  TryOut dan Materi Belajar Lengkap! Video belajar, rangkuman,
-                  kuis, Try Out UTBK dan Try Out Ujian Mandiri
-                </div>
-              </div>
-              <img class="class-1-icon" alt="" src="./fitur/public/class-1@2x.png" />
-            </div>
-          </div>
-          <div class="button-parent38">
-            <div class="button181">
-              <img
-                class="vuesaxlineararrow-left-icon50"
-                alt=""
-                src="./fitur/public/vuesaxlineararrowleft5.svg"
-              />
-
-              <div class="selanjutnya52">Lihat Testimoni</div>
-              <img
-                class="vuesaxlineararrow-left-icon50"
-                alt=""
-                src="./fitur/public/vuesaxlineararrowright10.svg"
-              />
-            </div>
-            <div class="title-parent2">
-              <div class="title47">
-                <div class="live-class-reguler">Prime UTBK Lite</div>
-              </div>
-              <div class="title37">
-                <div class="more-detail">More Detail</div>
-              </div>
-              <div class="title38">
-                <div class="live-class-reguler">Harga Paket</div>
-              </div>
-              <div class="title39">
-                <div class="rp-1200000">Rp 339.000</div>
-              </div>
-              <div class="title51">
-                <div class="mulai-perjuanganmu-dari">
-                  Siapin UTBK dari sekarang sampai nanti hari terakhir UTBK,
-                  TryOut dan Materi Belajar Lengkap! Video belajar, rangkuman,
-                  kuis, Try Out UTBK dan Try Out Ujian Mandiri
-                </div>
-              </div>
-              <img class="class-1-icon" alt="" src="./fitur/public/class-1@2x.png" />
-            </div>
-          </div>
-          <div class="button-parent39">
-            <div class="button181">
-              <img
-                class="vuesaxlineararrow-left-icon50"
-                alt=""
-                src="./fitur/public/vuesaxlineararrowleft5.svg"
-              />
-
-              <div class="selanjutnya52">Lihat Testimoni</div>
-              <img
-                class="vuesaxlineararrow-left-icon50"
-                alt=""
-                src="./fitur/public/vuesaxlineararrowright10.svg"
-              />
-            </div>
-            <div class="title-parent3">
-              <div class="title57">
-                <div class="live-class-reguler">Siap Belajar 1 Tahun</div>
-              </div>
-              <div class="title37">
-                <div class="more-detail">More Detail</div>
-              </div>
-              <div class="title38">
-                <div class="live-class-reguler">Harga Paket</div>
-              </div>
-              <div class="title39">
-                <div class="rp-1200000">Rp 229.000</div>
-              </div>
-              <div class="title61">
-                <div class="mulai-perjuanganmu-dari">
-                  Belajar seru dan mudah paham bareng TutorDek! Dapatkan akses
-                  video, rangkuman dan bank soal selama 1 tahun (365 hari).
-                </div>
-              </div>
-              <img class="class-1-icon" alt="" src="./fitur/public/class-1@2x.png" />
-            </div>
-          </div>
-          <div class="button-parent40">
-            <div class="button181">
-              <img
-                class="vuesaxlineararrow-left-icon50"
-                alt=""
-                src="./fitur/public/vuesaxlineararrowleft5.svg"
-              />
-
-              <div class="selanjutnya52">Lihat Testimoni</div>
-              <img
-                class="vuesaxlineararrow-left-icon50"
-                alt=""
-                src="./fitur/public/vuesaxlineararrowright10.svg"
-              />
-            </div>
-            <div class="title-parent3">
-              <div class="title57">
-                <div class="live-class-reguler">Siap Belajar 6 Bulan</div>
-              </div>
-              <div class="title37">
-                <div class="more-detail">More Detail</div>
-              </div>
-              <div class="title38">
-                <div class="live-class-reguler">Harga Paket</div>
-              </div>
-              <div class="title39">
-                <div class="rp-1200000">Rp 229.000</div>
-              </div>
-              <div class="title61">
-                <div class="mulai-perjuanganmu-dari">
-                  Belajar seru dan mudah paham bareng TutorDek! Dapatkan akses
-                  video, rangkuman dan bank soal selama 6 Bulan.
-                </div>
-              </div>
-              <img class="class-1-icon" alt="" src="./fitur/public/class-1@2x.png" />
-            </div>
-          </div>
-        </div>
-        </div>
-
-      <div class="business-women-signature-docum-group">
-        <img
-          class="business-women-signature-docum-icon1"
-          alt=""
-          src="./fitur/public/businesswomensignaturedocument-11@2x.png"
-        />
-
-        <div class="container-promo-title4">
-          <div class="title67">
-            <div class="text99">Ramadhan Promo</div>
-            <div class="text100">
-              Get Ramadhan Promos with terms and condition that already apply
-            </div>
-          </div>
-          <div class="button189">
-            <img
-              class="vuesaxlineararrow-right-icon55"
-              alt=""
-              src="./fitur/public/vuesaxlinearticketdiscount2.svg"
-            />
-
-            <div class="selanjutnya65">Claim</div>
-            <img
-              class="vuesaxlineararrow-left-icon50"
-              alt=""
-              src="./fitur/public/vuesaxlineararrowright16.svg"
-            />
-          </div>
-        </div>
-      </div>
-      <div class="business-women-signature-docum-container">
-        <img
-          class="business-women-signature-docum-icon2"
-          alt=""
-          src="./fitur/public/businesswomensignaturedocument-12@2x.png"
-        />
-
-        <div class="container-promo-title5">
-          <div class="title67">
-            <div class="text99">Ramadhan Promo</div>
-            <div class="text100">
-              Get Ramadhan Promos with terms and condition that already apply
-            </div>
-          </div>
-          <div class="button189">
-            <img
-              class="vuesaxlineararrow-right-icon55"
-              alt=""
-              src="./fitur/public/vuesaxlinearticketdiscount3.svg"
-            />
-
-            <div class="selanjutnya65">Claim</div>
-            <img
-              class="vuesaxlineararrow-left-icon50"
-              alt=""
-              src="./fitur/public/vuesaxlineararrowright17.svg"
-            />
-          </div>
-        </div>
+        <img class="social-icon18" alt="" src="./fitur/public/vuesaxlineararrowup1.svg" />
       </div>
     </div>
 
     <script>
-      var buttonContainer1 = document.getElementById("buttonContainer1");
+      var buttonContainer1 = document.getElementById('buttonContainer1');
       if (buttonContainer1) {
-        buttonContainer1.addEventListener("click", function (e) {
-        });
+        buttonContainer1.addEventListener('click', function (e) {});
       }
 
-      var activeTabsContainer = document.getElementById("activeTabsContainer");
+      var activeTabsContainer = document.getElementById('activeTabsContainer');
       if (activeTabsContainer) {
-        activeTabsContainer.addEventListener("click", function () {
+        activeTabsContainer.addEventListener('click', function () {
           var anchor = document.querySelector("[data-scroll-to='navbarContainer']");
           if (anchor) {
-            anchor.scrollIntoView({ block: "start", behavior: "smooth" });
+            anchor.scrollIntoView({ block: 'start', behavior: 'smooth' });
           }
         });
       }
-      </script>
+    </script>
 
-  <script src="Javascript/popup.js"></script>
-<script src="Javascript/client.js"></script>
-<script src="Javascript/repairs.js"></script>
-</body>
+    <script src="Javascript/popup.js"></script>
+    <script src="Javascript/client.js"></script>
+    <script src="Javascript/repairs.js"></script>
+  </body>
 </html>

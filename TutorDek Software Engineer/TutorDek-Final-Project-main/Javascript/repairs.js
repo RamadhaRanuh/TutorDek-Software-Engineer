@@ -414,7 +414,7 @@
     detail.onclick = () => openFeature('videosoal');
     keyboard(detail, 'Lihat detail fitur');
   }
-  document.querySelectorAll('[class^="button"], .claim').forEach((node) => {
+  document.querySelectorAll('[class^="button"], .claim, .offer-claim').forEach((node) => {
     const text = node.textContent.trim();
     if (['Claim', 'Claim Now', 'Claim Now!', 'Klaim', 'Klaim Sekarang'].includes(text)) {
       node.onclick = () => run(promo);
@@ -447,7 +447,10 @@
   });
   document.querySelectorAll('.more-detail').forEach((node, index) => {
     node.onclick = () => run(() => packageDetail(index));
-    keyboard(node, 'Detail paket');
+    keyboard(
+      node,
+      'Detail paket ' + (node.closest('.package-card')?.querySelector('h3')?.textContent || ''),
+    );
   });
   if (location.pathname.includes('paket-belajar')) {
     const cards = [...document.querySelectorAll('.more-detail')].map((node) =>
@@ -463,7 +466,7 @@
         cards.forEach(
           (card, n) =>
             (card.hidden =
-              index === 1 ? n > 1 : index === 2 ? n < 2 || n > 3 : index === 3 ? n < 4 : false),
+              index === 1 ? n >= 4 : index === 2 ? n >= 2 : index === 3 ? n < 4 : false),
         );
         document
           .querySelectorAll('[data-package-filter]')
@@ -575,16 +578,23 @@
     document.querySelectorAll('.buy-now').forEach((node, index) => {
       node.onclick = () =>
         run(() => read(['bilangan', 'perbandingan', 'pythagoras', 'kartesius'][index]));
-      keyboard(node, 'Pratinjau materi contoh');
+      keyboard(
+        node,
+        'Pratinjau materi contoh ' +
+          (node.closest('.audio-row')?.querySelector('h3')?.textContent || ''),
+      );
     });
     document.querySelectorAll('.play-button-1-icon').forEach((node, index) => {
       node.onclick = () =>
         run(() => read(['bilangan', 'perbandingan', 'pythagoras', 'kartesius'][index]));
-      keyboard(node, 'Buka sampel audio');
+      keyboard(
+        node,
+        'Buka sampel audio ' + (node.closest('.audio-row')?.querySelector('h3')?.textContent || ''),
+      );
     });
     document.querySelectorAll('.title-parent > [class^="button-parent"]').forEach((node, index) => {
       node.onclick = () => run(() => materials('', '', ['', 'SD', 'SMP', 'SMA'][index]));
-      keyboard(node, 'Buka kategori materi');
+      keyboard(node, 'Buka kategori materi ' + node.textContent.trim());
     });
     let selectedBook = 0;
     document.querySelectorAll('.slider2 .button143').forEach((node, index) => {
@@ -616,6 +626,13 @@
     }
   }
   if (location.pathname.includes('testimoni')) {
+    const video = document.querySelector('.story-video-button');
+    if (video)
+      video.onclick = () =>
+        modal(
+          'Cerita siswa',
+          '<p>Video testimoni belum tersedia. Cuplikan ini merupakan contoh dari desain asli proyek.</p>',
+        );
     const trigger = document.querySelector('.button34');
     if (trigger)
       trigger.onclick = () =>
