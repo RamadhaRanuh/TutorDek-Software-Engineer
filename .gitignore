@@ -6,4 +6,5 @@ data/
 test-results/
 playwright-report/
 artifacts/
+.scratch/
 *.sqlite3*
