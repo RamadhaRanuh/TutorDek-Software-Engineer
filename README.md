@@ -1,6 +1,6 @@
 # TutorDek
 
-TutorDek runs the project's original HTML, CSS, JavaScript, cards, and artwork with repaired account, booking, catalogue, and learning interactions. The original desktop composition remains; responsive overrides let the same pages work on smaller screens. The replacement SPA has been removed.
+TutorDek runs the project's original HTML, CSS, JavaScript, cards, and artwork with repaired account, booking, catalogue, and learning interactions. The landing page keeps its original desktop composition. Package, ebook, promo, and testimonial pages group their original content into responsive sections and cards. The replacement SPA has been removed.
 
 ## Run locally
 
@@ -24,6 +24,7 @@ python server.py --temporary --port 8001
 - Original signup/sign-in forms validate and save accounts. Password visibility, Remember Me, useful errors, logout, and the signed-in **Akun Saya** button work.
 - The original hero search finds tutors, subjects, packages, and sample materials. Tutor profiles open their original popups; **Pesan Sekarang** preselects the chosen tutor.
 - Original manual/automatic booking pages keep their five steps. Grade/topic changes reset dependent choices. Both Online and Offline need a future WIB schedule; Offline also needs an address. Matching and server transactions prevent incompatible or overlapping reservations.
+- Automatic booking shows the current step, compatible tutor previews, advertised time buttons, and a readable checkout. The original **Guru Terbaik Kami** strip advances while visible, with pause/resume, touch scrolling, pagination, and keyboard navigation; hover, focus, dialogs, and reduced motion suspend playback.
 - Checkout previews rates and promos, saves a reservation, and confirms a demo payment. Guest selections survive signup. **Akun Saya** lists saved sessions and supports notes, cancellation, completion after the session ends, and one review per completed session.
 - Original package filters/details keep the six cards and advertised prices. **Simpan koleksi demo** saves access to sample lessons; it does not activate a paid subscription. E-Book cards/category/audio controls open relevant samples, reading, browser narration, and text downloads.
 - The original **Fitur** popup and feature tabs open lessons, completion, server-graded exercises/TryOut/BrainBoost, progress targets, saved outgoing tutor messages, forum questions/replies, and sourced Robot Tutor explanations.
@@ -48,7 +49,7 @@ npm test
 npm run format:check
 ```
 
-On Linux, use `npx playwright install --with-deps chromium`. Python tests cover persistence, authentication, ownership, server validation, concurrency, pricing, and lifecycle boundaries. Browser tests operate the restored HTML pages on desktop/mobile, check original desktop geometry and artwork, inspect all page assets, and exercise original interactions. Separate temporary servers isolate desktop/mobile storage. Screenshots are generated under ignored `artifacts/original/`; failures retain Playwright traces. CI repeats the gate on Linux. See [verification](docs/verification.md) and the amended [wayfinder specification](.scratch/finish-tutordek/spec.md).
+On Linux, use `npx playwright install --with-deps chromium`. Python tests cover persistence, authentication, ownership, server validation, concurrency, pricing, and lifecycle boundaries. Browser tests operate the original pages on desktop/mobile, check landing geometry and artwork, inspect page assets, and exercise learner interactions. Catalogue checks cover 320–1440px widths, clipped artwork, text collisions, filters/actions, and targeted accessibility. Separate temporary servers isolate desktop/mobile storage. Screenshots are generated under ignored `artifacts/original/` and `artifacts/ui-fixes/`; failures retain Playwright traces. CI repeats the gate on Linux. See [verification](docs/verification.md) and the amended [wayfinder specification](.scratch/finish-tutordek/spec.md).
 
 ## Code map
 
@@ -57,6 +58,7 @@ On Linux, use `npx playwright install --with-deps chromium`. Python tests cover 
 | `TutorDek Software Engineer/TutorDek-Final-Project-main/*.html` | Active original pages, repaired in place |
 | `CSS/`, `fitur/*.css` inside that directory | Original generated styles, preserved |
 | `CSS/repairs.css` inside that directory | Responsive, popup, focus, and form overrides |
+| `CSS/pages.css`, `CSS/booking.css` inside that directory | Fluid catalogue layouts and automatic booking guidance |
 | `Javascript/`, `Sign-in fiture/`, `Sign-up fiture/` | Original interaction files plus service/action adapters |
 | `public/`, `fitur/public/`, `vendor/` | Original artwork and bundled licensed fonts/Bootstrap |
 | `server.py`, `tutordek/` | Local entrypoint, same-origin API, SQLite persistence, validation, sample content |
